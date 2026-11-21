@@ -15,7 +15,11 @@ function updateButtonsState(swiper) {
   }
 }
 
-const feedbacksSwiper = new Swiper('.feedbacks-slider', {
+export function initFeedback() {
+  const sliderEl = document.querySelector('.feedbacks-slider');
+  if (!sliderEl) return;
+
+    const feedbacksSwiper = new Swiper('.feedbacks-slider', {
   slidesPerView: 1,
   spaceBetween: 24,
   loop: false,
@@ -44,3 +48,4 @@ const feedbacksSwiper = new Swiper('.feedbacks-slider', {
     },
   },
 });
+}
