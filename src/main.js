@@ -7,11 +7,15 @@ import {initFooter} from './js/footer.js';
 import {initModal} from './js/modal.js';
 
 function safeInit(initFn, name) {
-    try {
-        initFn();
-    } catch (error) {
-        console.error(`Error in ${name}:`, error);
-    }
+  if (typeof initFn !== 'function') {
+    console.warn(`[${name}] init function is not a function`);
+    return;
+  }
+  try {
+    initFn();
+  } catch (error) {
+    console.error(`Error in ${name}:`, error);
+  }
 }
 
 document.addEventListener('DOMContentLoaded',() => {
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded',() => {
     safeInit(initHero, 'hero');
     safeInit(initBooks, 'books');
     safeInit(initFeedback, 'feedback');
-    safeInit(initEvents, 'events');
+   // safeInit(initEvents, 'events');
     safeInit(initFooter, 'footer');
     safeInit(initModal, 'modal');
 })
