@@ -1,6 +1,20 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 
+function updateButtonsState(swiper) {
+  const prevBtn = document.querySelector('.feedbacks__btn--prev');
+  const nextBtn = document.querySelector('.feedbacks__btn--next');
+  const noScrollNeeded = swiper.isBeginning && swiper.isEnd;
+
+  if (prevBtn) {
+    prevBtn.disabled = noScrollNeeded || swiper.isBeginning;
+  }
+
+  if (nextBtn) {
+    nextBtn.disabled = noScrollNeeded || swiper.isEnd;
+  }
+}
+
 const feedbacksSwiper = new Swiper('.feedbacks-slider', {
   slidesPerView: 1,
   spaceBetween: 24,
