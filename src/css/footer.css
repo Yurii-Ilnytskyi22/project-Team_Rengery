@@ -1,0 +1,188 @@
+.footer {
+  background-color: #ea8d50;
+  color: #0b0500;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 64px;
+}
+
+/* Верхняя часть: слева логотип и меню, справа форма */
+.footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Логотип */
+.footer__logo {
+  display: inline-block;
+  align-self: flex-start;
+  line-height: 0;
+}
+
+.footer__logo-icon {
+  display: block;
+  width: 84px;
+  height: 36px;
+  --color2: #0b0500;
+}
+
+/* Меню */
+.footer__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+/* Форма подписки */
+.footer__join {
+  width: 100%;
+  max-width: 400px;
+}
+
+.footer__title {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.footer__field {
+  display: flex;
+  gap: 16px;
+}
+
+.footer__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 50px;
+  padding: 0 19px;
+  border: 1px solid #c97944;
+  border-radius: 4px;
+  background-color: #de864c;
+  color: #0b0500;
+}
+
+.footer__input::placeholder {
+  color: rgba(11, 5, 0, 0.6);
+}
+
+.footer__input--error {
+  border-color: #0b0500;
+}
+
+.footer__button {
+  flex-shrink: 0;
+  height: 50px;
+  padding: 0 24px;
+  border: 1px solid #0b0500;
+  border-radius: 4px;
+  background-color: transparent;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.footer__button:hover {
+  background-color: rgba(11, 5, 0, 0.08);
+}
+
+.footer__required {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.footer__message {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.footer__message:empty {
+  display: none;
+}
+
+.footer__message--error {
+  color: #8a0016;
+}
+
+.footer__message--success {
+  color: #0b5d1e;
+}
+
+/* Нижняя часть: разделитель и копирайт */
+.footer__bottom {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid #eea473;
+  text-align: center;
+}
+
+.footer__copy {
+  font-size: 14px;
+}
+
+/* Фокус с клавиатуры */
+.footer__logo:focus-visible,
+.footer__link:focus-visible,
+.footer__input:focus-visible,
+.footer__button:focus-visible {
+  outline: 2px solid #0b0500;
+  outline-offset: 3px;
+}
+
+@media (max-width: 991px) {
+  .footer__container {
+    padding: 80px 64px;
+  }
+
+  .footer__top {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer__brand {
+    align-items: center;
+  }
+
+  .footer__logo {
+    align-self: center;
+  }
+
+  .footer__list {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .footer__container {
+    padding: 80px 16px;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer__join {
+    max-width: none;
+  }
+}
