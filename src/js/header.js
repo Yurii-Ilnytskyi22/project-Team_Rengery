@@ -31,18 +31,14 @@ export function initHeader() {
     document.body.classList.remove('menu-open');
   }
 
-  // Открытие меню
   openBtn.addEventListener('click', openMenu);
 
-  // Закрытие по крестику
   closeBtn.addEventListener('click', () => closeMenu());
 
-  // Закрытие при переходе к секции
   menuLinks.forEach(link => {
     link.addEventListener('click', () => closeMenu(false));
   });
 
-  // Закрытие по Escape
   document.addEventListener('keydown', event => {
     if (!mobileMenu.classList.contains('is-open')) return;
 
@@ -50,7 +46,6 @@ export function initHeader() {
       closeMenu();
     }
 
-    // Удерживаем фокус внутри открытого меню
     if (event.key === 'Tab') {
       const focusable = [
         ...mobileMenu.querySelectorAll(
@@ -71,7 +66,6 @@ export function initHeader() {
     }
   });
 
-  // Закрытие меню при переходе на планшетную ширину
   window
     .matchMedia('(min-width: 768px)')
     .addEventListener('change', event => {
