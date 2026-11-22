@@ -177,6 +177,7 @@
     justify-content: space-between;
     gap: 16px;
     margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .books-description {
@@ -226,7 +227,7 @@
 .books-learn-more {
     width: 100%;
     min-height: 40px;
-    margin-top: 16px;
+    margin-top: auto;
     padding: 7px 20px;
     color: inherit;
     background-color: transparent;
@@ -336,6 +337,11 @@
         padding: 8px 0;
     }
 
+    .books-category-button:disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+
     .books-catalog {
         flex: 1;
         margin-top: 0;
@@ -349,4 +355,9 @@
 
 .is-hidden {
     display: none;
+}
+
+.books-load-warning {
+    margin-bottom: 16px;
+    font-size: 14px;
 }
