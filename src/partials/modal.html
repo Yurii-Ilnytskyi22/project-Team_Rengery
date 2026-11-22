@@ -26,13 +26,19 @@
           <!--#region book-buy-calculator-->
           <form class="modal-bookform-buy">
             <div class="book-buy-quantity">
-              <button type="button">
+              <button type="button" class="btn-minus">
                 <svg class="btn-minus-qw" width="24" height="24">
                   <use href="/img/sprite.svg#icon-minus"></use>
                 </svg>
               </button>
-              <input type="number" value="1" min="1" readonly />
-              <button type="button">
+              <input
+                type="number"
+                value="1"
+                min="1"
+                class="book-quantity"
+                readonly
+              />
+              <button type="button" class="btn-plus">
                 <svg class="btn-plus-qw" width="24" height="24">
                   <use href="/img/sprite.svg#icon-plus"></use>
                 </svg>
