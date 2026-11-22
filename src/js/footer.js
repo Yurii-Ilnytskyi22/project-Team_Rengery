@@ -1,16 +1,18 @@
-(() => {
+export function initFooter() {
   const form = document.querySelector('.footer__form');
   if (!form) return;
 
   const input = form.querySelector('.footer__input');
   const message = form.querySelector('.footer__message');
 
-  const mq = window.matchMedia('(max-width: 991px)');
+  const desktopMq = window.matchMedia('(min-width: 1440px)');
   const updatePlaceholder = () => {
-    input.placeholder = mq.matches ? 'Enter your email' : 'Enter your email*';
+    input.placeholder = desktopMq.matches
+      ? 'Enter your email*'
+      : 'Enter your email';
   };
   updatePlaceholder();
-  mq.addEventListener('change', updatePlaceholder);
+  desktopMq.addEventListener('change', updatePlaceholder);
 
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -50,5 +52,4 @@
     input.classList.remove('footer__input--error');
     showMessage('', null);
   });
-})();
-//dfsfsdf//
+}
