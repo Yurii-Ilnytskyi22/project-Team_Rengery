@@ -1,4 +1,4 @@
-/* Базовые стили */
+/* Базові стилі */
 
 .visually-hidden {
     position: absolute;
@@ -12,60 +12,56 @@
     border: 0;
 }
 
-
-
-
-/* Секция */
+/* Секція */
 
 .books {
+    padding-block: 32px;
     font-family: "Rubik", Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     color: #0b0500;
     background-color: #fceee6;
-
-    padding-block: 32px;
 }
 
-.books-container {
+.books__container {
     display: flex;
     flex-direction: column;
 }
 
-.books-sidebar,
-.books-catalog {
+.books__sidebar,
+.books__catalog {
     min-width: 0;
 }
 
-/* Заголовок и счётчик */
+/* Заголовок і лічильник */
 
-.books-heading {
+.books__heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
 }
 
-.books-subtitle {
+.books__subtitle {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.5;
     color: inherit;
 }
 
-.books-counter {
+.books__counter {
     flex-shrink: 0;
     font-size: 14px;
 }
 
-/* Фильтр категорий */
+/* Категорії */
 
-.books-filter {
+.books__filter {
     position: relative;
     margin-top: 24px;
 }
 
-.books-filter-toggle {
+.books__filter-toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,19 +77,17 @@
     border-radius: 4px;
 }
 
-.books-filter-icon {
+.books__filter-icon {
     flex-shrink: 0;
     fill: currentColor;
     transition: transform 250ms ease;
 }
 
-/* JS добавляет is-open */
-
-.books-filter.is-open .books-filter-icon {
+.books__filter.is-open .books__filter-icon {
     transform: rotate(180deg);
 }
 
-.books-categories {
+.books__categories {
     position: absolute;
     top: calc(100% + 4px);
     left: 0;
@@ -111,20 +105,20 @@
     scrollbar-color: #e15d05 transparent;
 }
 
-.books-filter.is-open .books-categories {
+.books__filter.is-open .books__categories {
     display: block;
 }
 
-.books-categories::-webkit-scrollbar {
+.books__categories::-webkit-scrollbar {
     width: 6px;
 }
 
-.books-categories::-webkit-scrollbar-thumb {
+.books__categories::-webkit-scrollbar-thumb {
     background-color: #e15d05;
     border-radius: 4px;
 }
 
-.books-category-button {
+.books__category-button {
     display: block;
     width: 100%;
     padding: 8px 12px;
@@ -138,40 +132,45 @@
     transition: background-color 250ms ease;
 }
 
-.books-category-button:hover,
-.books-category-button.is-active {
+.books__category-button:hover,
+.books__category-button.is-active {
     background-color: rgb(11 5 0 / 5%);
+}
+
+.books__category-button:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 /* Список книг */
 
-.books-catalog {
+.books__catalog {
     margin-top: 32px;
 }
 
-.books-list {
+.books__list {
     display: flex;
     flex-wrap: wrap;
     gap: 40px 24px;
 }
 
-.books-item {
+.books__item {
     display: flex;
     flex-direction: column;
     width: 100%;
     min-width: 0;
 }
 
-.books-image {
+.books__image {
     width: 100%;
     aspect-ratio: 340 / 483.52;
     object-fit: cover;
     border-radius: 8px;
 }
 
-/* Информация о книге */
+/* Інформація про книгу */
 
-.books-info {
+.books__info {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -180,12 +179,12 @@
     margin-bottom: 16px;
 }
 
-.books-description {
+.books__description {
     flex: 1;
     min-width: 0;
 }
 
-.books-name {
+.books__name {
     overflow: hidden;
     font-size: 16px;
     font-weight: 600;
@@ -195,11 +194,11 @@
     text-overflow: ellipsis;
 }
 
-.books-author {
+.books__author {
     font-size: 14px;
 }
 
-.books-price {
+.books__price {
     flex-shrink: 0;
     font-size: 20px;
     font-weight: 600;
@@ -208,8 +207,8 @@
 
 /* Кнопки */
 
-.books-learn-more,
-.books-show-more {
+.books__learn-more,
+.books__show-more {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,7 +223,7 @@
         border-color 250ms ease;
 }
 
-.books-learn-more {
+.books__learn-more {
     width: 100%;
     min-height: 40px;
     margin-top: auto;
@@ -234,12 +233,12 @@
     border-color: #0b0500;
 }
 
-.books-learn-more:hover,
-.books-learn-more:focus-visible {
+.books__learn-more:hover,
+.books__learn-more:focus-visible {
     background-color: #ea8d50;
 }
 
-.books-show-more {
+.books__show-more {
     width: 100%;
     min-height: 48px;
     margin-top: 24px;
@@ -249,8 +248,8 @@
     border-color: #e15d05;
 }
 
-.books-show-more:hover,
-.books-show-more:focus-visible {
+.books__show-more:hover,
+.books__show-more:focus-visible {
     background-color: #0b0500;
     border-color: #0b0500;
 }
@@ -264,35 +263,42 @@
     outline-offset: 3px;
 }
 
+/* Повідомлення */
+
+.books__load-warning {
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
 /* Tablet */
 
 @media screen and (min-width: 768px) {
-    .books-container {
+    .books__container {
         max-width: 768px;
         padding-inline: 32px;
     }
 
-    .books-sidebar {
+    .books__sidebar {
         display: flex;
         align-items: center;
         gap: 24px;
     }
 
-    .books-heading {
+    .books__heading {
         flex: 1;
         min-width: 0;
     }
 
-    .books-filter {
+    .books__filter {
         flex: 0 0 249px;
         margin-top: 0;
     }
 
-    .books-item {
+    .books__item {
         width: calc((100% - 24px) / 2);
     }
 
-    .books-show-more {
+    .books__show-more {
         width: auto;
         min-width: 160px;
         margin-inline: auto;
@@ -302,7 +308,7 @@
 /* Desktop */
 
 @media screen and (min-width: 1440px) {
-    .books-container {
+    .books__container {
         flex-direction: row;
         align-items: flex-start;
         gap: 24px;
@@ -310,20 +316,20 @@
         padding-inline: 64px;
     }
 
-    .books-sidebar {
+    .books__sidebar {
         display: block;
         flex: 0 0 304px;
     }
 
-    .books-filter {
+    .books__filter {
         margin-top: 24px;
     }
 
-    .books-filter-toggle {
+    .books__filter-toggle {
         display: none;
     }
 
-    .books-categories {
+    .books__categories {
         position: static;
         display: block;
         max-height: none;
@@ -333,31 +339,22 @@
         border-radius: 0;
     }
 
-    .books-category-button {
+    .books__category-button {
         padding: 8px 0;
     }
 
-    .books-category-button:disabled {
-        opacity: 0.5;
-        cursor: default;
-    }
-
-    .books-catalog {
+    .books__catalog {
         flex: 1;
         margin-top: 0;
     }
 
-    .books-item {
+    .books__item {
         width: calc((100% - 72px) / 4);
     }
 }
 
+/* Прихований елемент */
 
 .is-hidden {
     display: none;
-}
-
-.books-load-warning {
-    margin-bottom: 16px;
-    font-size: 14px;
 }

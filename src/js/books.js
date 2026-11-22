@@ -6,13 +6,13 @@ const booksApi = axios.create({
 });
 
 // Елементи секції
-const categoriesList = document.querySelector('.books-categories');
-const categoriesFilter = document.querySelector('.books-filter');
-const categoriesToggle = document.querySelector('.books-filter-toggle');
-const booksList = document.querySelector('.books-list');
-const shownCounter = document.querySelector('.books-shown');
-const totalCounter = document.querySelector('.books-total');
-const showMoreButton = document.querySelector('.books-show-more');
+const categoriesList = document.querySelector('.books__categories');
+const categoriesFilter = document.querySelector('.books__filter');
+const categoriesToggle = document.querySelector('.books__filter-toggle');
+const booksList = document.querySelector('.books__list');
+const shownCounter = document.querySelector('.books__shown');
+const totalCounter = document.querySelector('.books__total');
+const showMoreButton = document.querySelector('.books__show-more');
 
 // Стан секції
 let allBooks = [];
@@ -61,7 +61,7 @@ async function getBooksByCategory(category) {
   return response.data;
 }
 
-// Обробка результатів усіх запитів
+// Обробка результатів запитів
 async function getAllBooks(categories) {
   const requests = categories.map(category =>
     getBooksByCategory(category.list_name)
@@ -118,9 +118,9 @@ function renderCategories(categories) {
   const markup = names
     .map(
       (name, index) => `
-        <li class="books-category-item">
+        <li class="books__category-item">
           <button
-            class="books-category-button${index === 0 ? ' is-active' : ''}"
+            class="books__category-button${index === 0 ? ' is-active' : ''}"
             type="button"
             disabled
           >
@@ -152,11 +152,11 @@ function createBookMarkup(book) {
       : 'Price unavailable';
 
   return `
-    <li class="books-item">
+    <li class="books__item">
       ${
         imageUrl
           ? `<img
-              class="books-image"
+              class="books__image"
               src="${imageUrl}"
               alt="${title}"
               loading="lazy"
@@ -164,17 +164,17 @@ function createBookMarkup(book) {
           : ''
       }
 
-      <div class="books-info">
-        <div class="books-description">
-          <h4 class="books-name" title="${title}">${title}</h4>
-          <p class="books-author">${author}</p>
+      <div class="books__info">
+        <div class="books__description">
+          <h4 class="books__name" title="${title}">${title}</h4>
+          <p class="books__author">${author}</p>
         </div>
 
-        <p class="books-price">${price}</p>
+        <p class="books__price">${price}</p>
       </div>
 
       <button
-        class="books-learn-more"
+        class="books__learn-more"
         type="button"
         value="${id}"
       >
@@ -184,7 +184,7 @@ function createBookMarkup(book) {
   `;
 }
 
-// Оновлення лічильника та кнопки
+// Лічильник і кнопка
 function updateBooksState() {
   shownCounter.textContent = shownCount;
   totalCounter.textContent = currentBooks.length;
@@ -223,14 +223,14 @@ function displayBooks(books) {
   if (currentBooks.length === 0) {
     booksList.insertAdjacentHTML(
       'beforeend',
-      '<li class="books-empty">No books found.</li>'
+      '<li class="books__empty">No books found.</li>'
     );
   }
 }
 
 // Вибір категорії
 function handleCategoryClick(event) {
-  const button = event.target.closest('.books-category-button');
+  const button = event.target.closest('.books__category-button');
 
   if (!button || button.disabled) {
     return;
@@ -294,9 +294,9 @@ export async function initBooks() {
     allBooks = result.books;
     displayBooks(allBooks);
 
-    // Розблокування завантажених категорій
+    // Доступні категорії
     categoriesList
-      .querySelectorAll('.books-category-button')
+      .querySelectorAll('.books__category-button')
       .forEach(button => {
         const name = button.textContent.trim();
 
@@ -305,11 +305,11 @@ export async function initBooks() {
           !result.loadedCategories.includes(name);
       });
 
-    // Повідомлення про часткове завантаження
+    // Часткове завантаження
     if (result.failedCategories.length > 0) {
       booksList.insertAdjacentHTML(
         'beforebegin',
-        `<p class="books-load-warning">
+        `<p class="books__load-warning">
           Some categories failed to load. Please refresh the page.
         </p>`
       );
@@ -320,7 +320,7 @@ export async function initBooks() {
     booksList.innerHTML = '';
     booksList.insertAdjacentHTML(
       'beforeend',
-      `<li class="books-empty">
+      `<li class="books__empty">
         Failed to load books. Please refresh the page.
       </li>`
     );
