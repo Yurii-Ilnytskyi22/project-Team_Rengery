@@ -46,16 +46,13 @@ function renderCategories(categories) {
 const categoriesFilter = document.querySelector('.books-filter');
 const categoriesToggle = document.querySelector('.books-filter-toggle');
 
-// Відкриття та закриття списку
 
-categoriesToggle.addEventListener('click', () => {
-  categoriesFilter.classList.toggle('is-open');
-});
+// Ініціалізація секції
+export async function initBooks() {
+  categoriesToggle.addEventListener('click', () => {
+    categoriesFilter.classList.toggle('is-open');
+  });
 
-
-// Запуск
-
-async function initBooks() {
   try {
     const categories = await getCategories();
     renderCategories(categories);
@@ -63,5 +60,3 @@ async function initBooks() {
     console.error('Failed to load categories:', error);
   }
 }
-
-initBooks();
