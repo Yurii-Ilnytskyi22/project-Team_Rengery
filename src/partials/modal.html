@@ -1,33 +1,33 @@
-<div class="modal-window">
+<div class="modal">
   <!-- add class is-open -->
   <div class="container">
     <!-- #region modal-window -->
-    <div class="modal-book-window">
+    <div class="modal__window">
       <!-- btm-close "X" -->
-      <button type="button" class="modal-close-btn" id="modal-close-btn">
-        <svg class="close-btn-icon" width="32" height="32">
+      <button type="button" class="modal__close-btn" id="modal-close-btn">
+        <svg class="modal__close-icon" width="32" height="32">
           <use href="/img/sprite.svg#icon-x"></use>
         </svg>
       </button>
       <!--#region main content block-->
-      <ul class="modal-content-block">
+      <ul class="modal__content">
         <!--#region book-img-->
-        <li class="book-img-wrapper">
+        <li class="modal__image">
           <!-- тут рендиться img -->
         </li>
         <!-- #endregion book-img-->
         <!--#region book-information-->
-        <li class="book-inform-wraper">
+        <li class="modal__info">
           <!--#region book-main-content-->
-          <div class="book-content-inform">
+          <div class="modal__book-info">
             <!-- тут рендиться інфо про книгу -->
           </div>
           <!-- #endregion book-main-content-->
           <!--#region book-buy-calculator-->
-          <form class="modal-bookform-buy">
-            <div class="book-buy-quantity">
-              <button type="button" class="btn-minus">
-                <svg class="btn-minus-qw" width="24" height="24">
+          <form class="modal__buy-form">
+            <div class="modal__quantity">
+              <button type="button" class="modal__quantity-btn--minus">
+                <svg class="modal__quantity-icon" width="24" height="24">
                   <use href="/img/sprite.svg#icon-minus"></use>
                 </svg>
               </button>
@@ -35,44 +35,46 @@
                 type="number"
                 value="1"
                 min="1"
-                class="book-quantity"
+                class="modal__quantity-input"
                 readonly
               />
-              <button type="button" class="btn-plus">
-                <svg class="btn-plus-qw" width="24" height="24">
+              <button type="button" class="modal__quantity-btn--plus">
+                <svg class="modal__quantity-icon" width="24" height="24">
                   <use href="/img/sprite.svg#icon-plus"></use>
                 </svg>
               </button>
             </div>
-            <div class="btn-wrapper">
-              <button type="button" class="btm-add-to-card">Add To Cart</button>
-              <button type="submit" class="btm-modal-buy">Buy Now</button>
+            <div class="modal__actions">
+              <button type="button" class="modal__add-to-cart">
+                Add To Cart
+              </button>
+              <button type="submit" class="modal__buy-now">Buy Now</button>
             </div>
           </form>
           <!-- #endregion book-buy-calculator-->
           <!--#region book-information-slider-->
-          <div class="accordion-container modal-addit-book-inform">
-            <div class="ac adit-book-item-wrapper">
+          <div class="accordion-container modal__accordion">
+            <div class="ac modal__accordion-item">
               <div class="ac-header">
                 <h2>
                   <button type="button" class="ac-trigger">
                     <span>Details</span>
-                    <svg class="btn-nav-arrow-down" width="24" height="24">
+                    <svg class="modal__accordion-icon" width="24" height="24">
                       <use href="/img/sprite.svg#icon-chevron-down"></use>
                     </svg>
                   </button>
                 </h2>
               </div>
               <div class="ac-panel">
-                <p class="ac-text details-text"></p>
+                <p class="ac-text modal__accordion-text--details"></p>
               </div>
             </div>
-            <div class="ac adit-book-item-wrapper">
+            <div class="ac modal__accordion-item">
               <div class="ac-header">
                 <h2>
                   <button type="button" class="ac-trigger">
                     <span>Shipping</span>
-                    <svg class="btn-nav-arrow-down" width="24" height="24">
+                    <svg class="modal__accordion-icon" width="24" height="24">
                       <use href="/img/sprite.svg#icon-chevron-down"></use>
                     </svg>
                   </button>
@@ -86,12 +88,12 @@
                 </p>
               </div>
             </div>
-            <div class="ac adit-book-item-wrapper">
+            <div class="ac modal__accordion-item">
               <div class="ac-header">
                 <h2>
                   <button type="button" class="ac-trigger">
                     <span>Returns</span>
-                    <svg class="btn-nav-arrow-down" width="24" height="24">
+                    <svg class="modal__accordion-icon" width="24" height="24">
                       <use href="/img/sprite.svg#icon-chevron-down"></use>
                     </svg>
                   </button>

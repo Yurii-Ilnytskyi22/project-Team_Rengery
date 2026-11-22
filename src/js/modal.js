@@ -4,22 +4,22 @@ import 'accordion-js/accordion.min.css';
 import '/css/modal.css';
 export function initModal() {
   // DOM-елементи модального вікна
-  const modal = document.querySelector('.modal-window');
+  const modal = document.querySelector('.modal');
   const closeBtn = document.querySelector('#modal-close-btn');
 
   // DOM-елементи інформації про книгу
-  const imageWrapper = document.querySelector('.book-img-wrapper');
-  const bookInfo = document.querySelector('.book-content-inform');
-  const detailsText = document.querySelector('.details-text');
+  const imageWrapper = document.querySelector('.modal__image');
+  const bookInfo = document.querySelector('.modal__book-info');
+  const detailsText = document.querySelector('.modal__accordion-text--details');
 
   // DOM-елементи керування кількістю книг
-  const quantityInput = document.querySelector('.book-quantity');
-  const minusBtn = document.querySelector('.btn-minus');
-  const plusBtn = document.querySelector('.btn-plus');
+  const quantityInput = document.querySelector('.modal__quantity-input');
+  const minusBtn = document.querySelector('.modal__quantity-btn--minus');
+  const plusBtn = document.querySelector('.modal__quantity-btn--plus');
 
   // DOM-елементи покупки
-  const buyForm = document.querySelector('.modal-bookform-buy');
-  const addToCartBtn = document.querySelector('.btm-add-to-card');
+  const buyForm = document.querySelector('.modal__buy-form');
+  const addToCartBtn = document.querySelector('.modal__add-to-cart');
 
   // Список книг
   const booksList = document.querySelector('.books__list');
@@ -33,7 +33,7 @@ export function initModal() {
   let currentBook;
 
   // Ініціалізація акордеона
-  const accordion = new Accordion('.modal-addit-book-inform', {
+  const accordion = new Accordion('.modal__accordion', {
     duration: 400,
     showMultiple: false,
   });
@@ -53,12 +53,10 @@ export function initModal() {
 
     try {
       const response = await booksApi.get(`/${bookId}`);
-      console.log(response);
 
       const book = response.data;
 
       currentBook = book;
-      console.log(currentBook);
 
       renderBook(book);
     } catch (error) {
@@ -79,19 +77,19 @@ export function initModal() {
     // Назва книги
     const title = document.createElement('h1');
 
-    title.classList.add('modal-book-title');
+    title.classList.add('modal__book-title');
     title.textContent = book.title;
 
     // Автор книги
     const author = document.createElement('p');
 
-    author.classList.add('modal-book-author');
+    author.classList.add('modal__book-author');
     author.textContent = book.author;
 
     // Ціна книги
     const price = document.createElement('p');
 
-    price.classList.add('modal-book-price');
+    price.classList.add('modal__book-price');
     price.textContent = `$${book.price}`;
 
     bookInfo.append(title, author, price);
