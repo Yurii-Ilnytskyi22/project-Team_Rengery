@@ -139,7 +139,7 @@
 
 .books__category-button:disabled {
     opacity: 0.5;
-    cursor: default;
+    cursor: not-allowed;
 }
 
 /* Список книг */
@@ -256,6 +256,7 @@
 
 .books button {
     font-family: inherit;
+    cursor: pointer;
 }
 
 .books button:focus-visible {
