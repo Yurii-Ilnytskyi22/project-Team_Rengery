@@ -1,15 +1,14 @@
-
 export function initHeader() {
-  const openBtn = document.querySelector('.menu-btn');
-  const closeBtn = document.querySelector('.menu-close-btn');
+  const openBtn = document.querySelector('.header__menu-btn');
+  const closeBtn = document.querySelector('.mobile-menu__close-btn');
   const mobileMenu = document.querySelector('.mobile-menu');
-  const menuLinks = document.querySelectorAll('.menu-nav-link');
+  const menuLinks = document.querySelectorAll('.mobile-menu__nav-link');
 
   if (!openBtn || !closeBtn || !mobileMenu) return;
 
   function openMenu() {
     mobileMenu.inert = false;
-    mobileMenu.classList.add('is-open');
+    mobileMenu.classList.add('mobile-menu--open');
     mobileMenu.setAttribute('aria-hidden', 'false');
 
     openBtn.setAttribute('aria-expanded', 'true');
@@ -23,7 +22,7 @@ export function initHeader() {
       openBtn.focus();
     }
 
-    mobileMenu.classList.remove('is-open');
+    mobileMenu.classList.remove('mobile-menu--open');
     mobileMenu.setAttribute('aria-hidden', 'true');
     mobileMenu.inert = true;
 
@@ -40,7 +39,7 @@ export function initHeader() {
   });
 
   document.addEventListener('keydown', event => {
-    if (!mobileMenu.classList.contains('is-open')) return;
+    if (!mobileMenu.classList.contains('mobile-menu--open')) return;
 
     if (event.key === 'Escape') {
       closeMenu();
@@ -71,7 +70,7 @@ export function initHeader() {
     .addEventListener('change', event => {
       if (
         event.matches &&
-        mobileMenu.classList.contains('is-open')
+        mobileMenu.classList.contains('mobile-menu--open')
       ) {
         closeMenu(false);
       }

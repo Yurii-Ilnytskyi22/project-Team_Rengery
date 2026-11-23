@@ -1,30 +1,40 @@
 
 <header class="header" id="header">
-  <div class="container header-container">
-    <a href="#home" class="header-logo" aria-label="Booksy — Home">
-      <svg class="header-logo-icon" width="84" height="36">
+  <div class="container header__container">
+    <a href="#home" class="header__logo" aria-label="Booksy — Home">
+      <svg class="header__logo-icon" width="84" height="36">
         <use href="./img/sprite.svg#icon-Company-Logo"></use>
       </svg>
     </a>
 
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <ul class="desktop-nav-list">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#books" class="nav-link">Books</a></li>
-        <li><a href="#feedbacks" class="nav-link">Feedbacks</a></li>
-        <li><a href="#events" class="nav-link">Events</a></li>
-        <li><a href="#location" class="nav-link">Location</a></li>
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list">
+        <li>
+          <a href="#home" class="header__nav-link">Home</a>
+        </li>
+        <li>
+          <a href="#books" class="header__nav-link">Books</a>
+        </li>
+        <li>
+          <a href="#feedbacks" class="header__nav-link">Feedbacks</a>
+        </li>
+        <li>
+          <a href="#events" class="header__nav-link">Events</a>
+        </li>
+        <li>
+          <a href="#location" class="header__nav-link">Location</a>
+        </li>
       </ul>
     </nav>
 
     <button
-      class="menu-btn"
+      class="header__menu-btn"
       type="button"
       aria-label="Open menu"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
-      <svg class="menu-btn-icon" width="24" height="24">
+      <svg class="header__menu-icon" width="24" height="24">
         <use href="./img/sprite.svg#icon-menu-alt-right"></use>
       </svg>
     </button>
@@ -38,32 +48,46 @@
   aria-hidden="true"
   inert
 >
-  <div class="container menu-container">
-    <div class="menu-up-wrap">
-      <a href="#home" class="menu-logo" aria-label="Booksy — Home">
-        <svg class="menu-logo-icon" width="84" height="36">
+  <div class="container mobile-menu__container">
+    <div class="mobile-menu__top">
+      <a
+        href="#home"
+        class="mobile-menu__logo"
+        aria-label="Booksy — Home"
+      >
+        <svg class="mobile-menu__logo-icon" width="84" height="36">
           <use href="./img/sprite.svg#icon-Company-Logo"></use>
         </svg>
       </a>
 
       <button
-        class="menu-close-btn"
+        class="mobile-menu__close-btn"
         type="button"
         aria-label="Close menu"
       >
-        <svg class="menu-close-icon" width="24" height="24">
+        <svg class="mobile-menu__close-icon" width="24" height="24">
           <use href="./img/sprite.svg#icon-x"></use>
         </svg>
       </button>
     </div>
 
-    <nav class="menu-nav" aria-label="Mobile navigation">
-      <ul class="menu-nav-list">
-        <li><a href="#home" class="menu-nav-link">Home</a></li>
-        <li><a href="#books" class="menu-nav-link">Books</a></li>
-        <li><a href="#feedbacks" class="menu-nav-link">Feedbacks</a></li>
-        <li><a href="#events" class="menu-nav-link">Events</a></li>
-        <li><a href="#location" class="menu-nav-link">Location</a></li>
+    <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+      <ul class="mobile-menu__nav-list">
+        <li>
+          <a href="#home" class="mobile-menu__nav-link">Home</a>
+        </li>
+        <li>
+          <a href="#books" class="mobile-menu__nav-link">Books</a>
+        </li>
+        <li>
+          <a href="#feedbacks" class="mobile-menu__nav-link">Feedbacks</a>
+        </li>
+        <li>
+          <a href="#events" class="mobile-menu__nav-link">Events</a>
+        </li>
+        <li>
+          <a href="#location" class="mobile-menu__nav-link">Location</a>
+        </li>
       </ul>
     </nav>
   </div>
