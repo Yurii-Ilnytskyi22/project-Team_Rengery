@@ -36,24 +36,28 @@
   overflow: hidden;
 }
 
-.swiper-wrapper-events {
+.events-section .swiper-wrapper-events {
   display: flex;
   justify-content: center;
   width: fit-content;
 }
 
-.events-list {
+.events-section .events-list {
   list-style: none;
   display: flex;
   padding: 0;
   margin: 0;
 }
 
-.swiper-slide-events {
+.events-section .swiper-slide-events {
   display: flex;
   flex-direction: column;
   border-radius: 12px;
   width: 342px;
+
+  /* width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;*/
 }
 
 @media screen and (min-width: 768px) {
