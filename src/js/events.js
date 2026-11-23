@@ -6,30 +6,29 @@ import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 
 export function initEvents() {
-  const sliderEl = document.querySelector('.swiper-events');
+  const sliderEl = document.querySelector('.swiper__events');
   if (!sliderEl) return;
 
-  new Swiper('.swiper-events', {
+  new Swiper('.swiper__events', {
     modules: [Navigation, Pagination],
 
-    wrapperClass: 'swiper-wrapper-events',
-    slideClass: 'swiper-slide-events',
+    wrapperClass: 'swiper__wrapper-events',
+    slideClass: 'swiper__slide-events',
 
     speed: 350,
     slidesPerView: 1,
     spaceBetween: 16,
-    //   watchOverflow: true,
 
     navigation: {
-      nextEl: '.swiper-events-button-next',
-      prevEl: '.swiper-events-button-prev',
+      nextEl: '.swiper__events-button-next',
+      prevEl: '.swiper__events-button-prev',
     },
 
     pagination: {
-      el: '.slider-controls .swiper-pagination', // всередині секції
+      el: '.slider__controls .swiper__pagination', // всередині секції
       clickable: true,
-      bulletClass: 'custom-bullet',
-      bulletActiveClass: 'custom-bullet-active',
+      bulletClass: 'custom__bullet',
+      bulletActiveClass: 'custom__bullet-active',
     },
 
     breakpoints: {
