@@ -2,7 +2,7 @@
 //import {initHero} from './js/hero.js';
 //import {initBooks} from './js/books.js';
 import { initFeedback } from './js/feedbacks.js';
-//import {initEvents} from './js/events.js';
+import { initEvents } from './js/events.js';
 //import {initFooter} from './js/footer.js';
 import { initModal } from './js/modal.js';
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //safeInit(initHero, 'hero');
   //safeInit(initBooks, 'books');
   safeInit(initFeedback, 'feedback');
-  //safeInit(initEvents, 'events');
+  safeInit(initEvents, 'events');
   //safeInit(initFooter, 'footer');
   safeInit(initModal, 'modal');
 });
