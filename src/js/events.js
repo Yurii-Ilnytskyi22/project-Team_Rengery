@@ -46,7 +46,7 @@ export function initEvents() {
 
     const eventName = registerBtn.dataset.event || '';
     const modalBackdrop = document.querySelector('[data-event-modal]');
-    const eventInput = modalBackdrop?.querySelector('[name="event"]);
+    const eventInput = modalBackdrop?.querySelector('[name="event"]');
 
     if (eventInput) {
       eventInput.value = eventName;
