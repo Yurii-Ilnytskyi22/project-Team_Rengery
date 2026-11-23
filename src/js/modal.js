@@ -24,6 +24,8 @@ export function initModal() {
   // Список книг
   const booksList = document.querySelector('.books__list');
 
+  if (!modal || !closeBtn || !booksList) return;
+
   // Змінні
 
   const booksApi = axios.create({
@@ -50,6 +52,7 @@ export function initModal() {
     imageWrapper.innerHTML = '';
     bookInfo.innerHTML = '';
     detailsText.textContent = '';
+    accordion.update();
 
     try {
       const response = await booksApi.get(`/${bookId}`);
@@ -75,7 +78,7 @@ export function initModal() {
     imageWrapper.append(image);
 
     // Назва книги
-    const title = document.createElement('h1');
+    const title = document.createElement('h2');
 
     title.classList.add('modal__book-title');
     title.textContent = book.title;
@@ -96,6 +99,7 @@ export function initModal() {
 
     // Опис книги
     detailsText.textContent = book.description;
+    accordion.update();
   }
 
   // Закриття модального вікна
@@ -108,8 +112,6 @@ export function initModal() {
 
   // Збільшення кількості книг
   function increaseQuantity() {
-    console.log(quantityInput);
-
     quantityInput.value = Number(quantityInput.value) + 1;
   }
 
@@ -152,7 +154,7 @@ export function initModal() {
 
   // Відкриття модального вікна при натисканні кнопки Learn more
   booksList.addEventListener('click', event => {
-    const button = event.target.closest('.books-learn-more');
+    const button = event.target.closest('.books__learn-more');
 
     if (!button) return;
 

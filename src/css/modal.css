@@ -191,11 +191,13 @@ body.modal-open {
   border-color: #0b0500;
   color: #0b0500;
 }
-.modal__add-to-cart:hover .modal__add-to-cart:focus {
+.modal__add-to-cart:hover,
+.modal__add-to-cart:focus {
   background-color: #0b0500;
   border-color: #0b0500;
 }
-.modal__buy-now:hover .modal__buy-now:focus {
+.modal__buy-now:hover,
+.modal__buy-now:focus {
   background-color: #ea8d50;
 }
 .modal__add-to-cart:active {
