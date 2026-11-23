@@ -6,12 +6,10 @@ import {
 } from './booksy-loader.js';
 import axios from 'axios';
 
-// Налаштування API
 const booksApi = axios.create({
   baseURL: 'https://books-backend-v2.b.goit.study',
 });
 
-// Елементи секції
 const categoriesList = document.querySelector('.books__categories');
 const categoriesFilter = document.querySelector('.books__filter');
 const categoriesToggle = document.querySelector('.books__filter-toggle');
@@ -20,12 +18,10 @@ const shownCounter = document.querySelector('.books__shown');
 const totalCounter = document.querySelector('.books__total');
 const showMoreButton = document.querySelector('.books__show-more');
 
-// Стан секції
 let allBooks = [];
 let currentBooks = [];
 let shownCount = 0;
 
-// Екранування тексту
 function escapeHTML(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -35,7 +31,6 @@ function escapeHTML(value) {
     .replaceAll("'", '&#39;');
 }
 
-// Перевірка адреси зображення
 function getImageUrl(value) {
   try {
     const url = new URL(value);
@@ -50,13 +45,11 @@ function getImageUrl(value) {
   return '';
 }
 
-// Завантаження категорій
 async function getCategories() {
   const response = await booksApi.get('/books/category-list');
   return response.data;
 }
 
-// Завантаження книг категорії
 async function getBooksByCategory(category) {
   const response = await booksApi.get('/books/category', {
     params: {
@@ -67,7 +60,6 @@ async function getBooksByCategory(category) {
   return response.data;
 }
 
-// Обробка результатів запитів
 async function getAllBooks(categories) {
   const requests = categories.map(category =>
     getBooksByCategory(category.list_name)
@@ -95,7 +87,6 @@ async function getAllBooks(categories) {
     }
   });
 
-  // Видалення повторів
   const uniqueIds = new Set();
 
   const books = loadedBooks.filter(book => {
@@ -114,7 +105,6 @@ async function getAllBooks(categories) {
   };
 }
 
-// Відображення категорій
 function renderCategories(categories) {
   const names = [
     'All categories',
@@ -141,7 +131,6 @@ function renderCategories(categories) {
   categoriesList.insertAdjacentHTML('beforeend', markup);
 }
 
-// Розмітка картки
 function createBookMarkup(book) {
   const title = escapeHTML(book.title);
   const author = escapeHTML(book.author);
@@ -190,7 +179,6 @@ function createBookMarkup(book) {
   `;
 }
 
-// Лічильник і кнопка
 function updateBooksState() {
   shownCounter.textContent = shownCount;
   totalCounter.textContent = currentBooks.length;
@@ -202,7 +190,6 @@ function updateBooksState() {
   }
 }
 
-// Додавання порції книг
 function appendBooks(amount) {
   const nextBooks = currentBooks.slice(
     shownCount,
@@ -217,7 +204,6 @@ function appendBooks(amount) {
   updateBooksState();
 }
 
-// Початкове відображення
 function displayBooks(books) {
   currentBooks = books;
   shownCount = 0;
@@ -234,7 +220,6 @@ function displayBooks(books) {
   }
 }
 
-// Вибір категорії
 function handleCategoryClick(event) {
   const button = event.target.closest('.books__category-button');
 
@@ -261,7 +246,6 @@ function handleCategoryClick(event) {
   categoriesFilter.classList.remove('is-open');
 }
 
-// Ініціалізація секції
 export async function initBooks() {
   categoriesToggle.addEventListener('click', () => {
     categoriesFilter.classList.toggle('is-open');
@@ -273,14 +257,12 @@ export async function initBooks() {
     appendBooks(4);
   });
 
-  // Закриття кліком поза фільтром
   document.addEventListener('click', event => {
     if (!categoriesFilter.contains(event.target)) {
       categoriesFilter.classList.remove('is-open');
     }
   });
 
-  // Закриття клавішею Escape
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
       categoriesFilter.classList.remove('is-open');
@@ -304,7 +286,6 @@ export async function initBooks() {
     allBooks = result.books;
     displayBooks(allBooks);
 
-    // Доступні категорії
     categoriesList
       .querySelectorAll('.books__category-button')
       .forEach(button => {
@@ -315,7 +296,6 @@ export async function initBooks() {
           !result.loadedCategories.includes(name);
       });
 
-    // Часткове завантаження
     if (result.failedCategories.length > 0) {
       booksList.insertAdjacentHTML(
         'beforebegin',

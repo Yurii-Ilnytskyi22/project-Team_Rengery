@@ -1,1 +1,94 @@
 
+<header class="header" id="header">
+  <div class="container header__container">
+    <a href="#home" class="header__logo" aria-label="Booksy — Home">
+      <svg class="header__logo-icon" width="84" height="36">
+        <use href="./img/sprite.svg#icon-Company-Logo"></use>
+      </svg>
+    </a>
+
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list">
+        <li>
+          <a href="#home" class="header__nav-link">Home</a>
+        </li>
+        <li>
+          <a href="#books" class="header__nav-link">Books</a>
+        </li>
+        <li>
+          <a href="#feedbacks" class="header__nav-link">Feedbacks</a>
+        </li>
+        <li>
+          <a href="#events" class="header__nav-link">Events</a>
+        </li>
+        <li>
+          <a href="#location" class="header__nav-link">Location</a>
+        </li>
+      </ul>
+    </nav>
+
+    <button
+      class="header__menu-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="header__menu-icon" width="24" height="24">
+        <use href="./img/sprite.svg#icon-menu-alt-right"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Burger menu -->
+<div
+  class="mobile-menu"
+  id="mobile-menu"
+  aria-hidden="true"
+  inert
+>
+  <div class="container mobile-menu__container">
+    <div class="mobile-menu__top">
+      <a
+        href="#home"
+        class="mobile-menu__logo"
+        aria-label="Booksy — Home"
+      >
+        <svg class="mobile-menu__logo-icon" width="84" height="36">
+          <use href="./img/sprite.svg#icon-Company-Logo"></use>
+        </svg>
+      </a>
+
+      <button
+        class="mobile-menu__close-btn"
+        type="button"
+        aria-label="Close menu"
+      >
+        <svg class="mobile-menu__close-icon" width="24" height="24">
+          <use href="./img/sprite.svg#icon-x"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+      <ul class="mobile-menu__nav-list">
+        <li>
+          <a href="#home" class="mobile-menu__nav-link">Home</a>
+        </li>
+        <li>
+          <a href="#books" class="mobile-menu__nav-link">Books</a>
+        </li>
+        <li>
+          <a href="#feedbacks" class="mobile-menu__nav-link">Feedbacks</a>
+        </li>
+        <li>
+          <a href="#events" class="mobile-menu__nav-link">Events</a>
+        </li>
+        <li>
+          <a href="#location" class="mobile-menu__nav-link">Location</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
