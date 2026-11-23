@@ -7,7 +7,6 @@ import { initEvents } from './js/events.js';
 import {initFooter} from './js/footer.js';
 import { initModal } from './js/modal.js';
 import { initFooter } from './js/footer.js';
-import { initModal } from './js/modal.js';
 
 
 function safeInit(initFn, name) {
