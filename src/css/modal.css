@@ -280,7 +280,7 @@ body.modal-open {
 
 /* Tablet */
 @media screen and (min-width: 768px) {
-  .container {
+  .modal__container {
     padding: 64px 32px;
   }
   .modal__window {
@@ -299,7 +299,7 @@ body.modal-open {
 
 /* Desktop */
 @media screen and (min-width: 1440px) {
-  .container {
+  .modal__container {
     padding: 64px 70px;
   }
   .modal__window {
