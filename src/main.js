@@ -1,5 +1,5 @@
 import { initHeader } from './js/header.js';
-// import { initHero } from './js/hero.js';
+import { initHero } from './js/hero.js';
 import { initBooks } from './js/books.js';
 import { initFeedback } from './js/feedbacks.js';
 import { initEvents } from './js/events.js';
@@ -21,7 +21,7 @@ function safeInit(initFn, name) {
 
 document.addEventListener('DOMContentLoaded', () => {
   safeInit(initHeader, 'header');
-  // safeInit(initHero, 'hero');
+  safeInit(initHero, 'hero');
   safeInit(initBooks, 'books');
   safeInit(initFeedback, 'feedback');
   safeInit(initEvents, 'events');
