@@ -26,6 +26,7 @@
 .footer__logo {
   display: inline-block;
   line-height: 0;
+  cursor: pointer;
 }
 
 .footer__logo-icon {
@@ -43,15 +44,17 @@
   gap: 32px;
 }
 
-.footer__link:hover {
-  text-decoration: underline;
+.footer__link {
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
+.footer__link:hover,
+.footer__link:focus-visible,
 .footer__link:active {
   color: #3b342e;
 }
 
-/* Форма подписки */
 .footer__join {
   width: 100%;
 }
@@ -110,7 +113,10 @@
   border-radius: 4px;
   background-color: transparent;
   color: #0b0500;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer__button:hover,
@@ -121,8 +127,10 @@
 
 .footer__button:active {
   background-color: #dad9d8;
+  color: #0b0500;
 }
 
+/* Disabled */
 .footer__button:disabled {
   border-color: #ccbfb8;
   background-color: transparent;
@@ -138,7 +146,7 @@
 
 .footer__message {
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .footer__message:empty {

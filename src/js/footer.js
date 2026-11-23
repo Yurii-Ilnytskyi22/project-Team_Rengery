@@ -14,8 +14,6 @@ export function initFooter() {
   updatePlaceholder();
   desktopMq.addEventListener('change', updatePlaceholder);
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
   const showMessage = (text, type) => {
     message.textContent = text;
     message.classList.remove(
@@ -27,18 +25,17 @@ export function initFooter() {
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    const email = input.value.trim();
 
-    if (!email) {
+    if (input.validity.valueMissing) {
       input.classList.add('footer__input--error');
-      showMessage('Please enter your email', 'error');
+      showMessage('Error text', 'error');
       input.focus();
       return;
     }
 
-    if (!emailPattern.test(email)) {
+    if (!input.checkValidity()) {
       input.classList.add('footer__input--error');
-      showMessage('Enter a valid email', 'error');
+      showMessage('Error text', 'error');
       input.focus();
       return;
     }
