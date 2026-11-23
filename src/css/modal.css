@@ -149,15 +149,24 @@ body.modal-open {
   background-color: transparent;
 }
 .modal__quantity input {
+  flex-shrink: 0;
   width: 42px;
   height: 40px;
-  padding: 8px 12px;
-  background: #0b05000d;
+  padding: 8px 2px;
   border: var(--border-width) solid #0b050026;
   border-radius: var(--radius-sm);
+  background: #0b05000d;
+  color: #0b0500;
+  font: inherit;
   text-align: center;
-  font-family: inherit;
+  appearance: textfield;
 }
+modal__quantity input::-webkit-inner-spin-button,
+.modal__quantity input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
 .modal__actions {
   display: flex;
   flex-direction: column;
