@@ -5,7 +5,6 @@ import { initFeedback } from './js/feedbacks.js';
 import { initEvents } from './js/events.js';
 import {initFooter} from './js/footer.js';
 import { initModal } from './js/modal.js';
-import { initFooter } from './js/footer.js';
 
 
 function safeInit(initFn, name) {
