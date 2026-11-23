@@ -66,6 +66,10 @@
   height: auto;
   margin-bottom: 24px;
   border-radius: 16px;
+
+  aspect-ratio: 416 / 277;
+  object-fit: cover;
+  background-color: #e8e0d8;
 }
 
 .event__content {
@@ -121,8 +125,8 @@
 
 .event__btn-icon {
   flex-shrink: 0;
-  width: 14px;
-  height: 14px;
+  width: 24px;
+  height: 24px;
   fill: currentColor;
   transition: transform 0.25s ease;
 }
@@ -131,7 +135,6 @@
 .event__btn:focus-visible .event__btn-icon {
   transform: translateX(3px);
 }
-
 
 .slider__controls {
   display: flex;
@@ -173,7 +176,7 @@
   top: 50%;
   left: 50%;
   width: 24px;
-  height: 14px;
+  height: 24px;
   transform: translate(-50%, -50%);
 }
 
