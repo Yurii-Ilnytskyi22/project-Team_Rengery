@@ -25,7 +25,7 @@ export function initEvents() {
     },
 
     pagination: {
-      el: '.slider__controls .swiper__pagination', // всередині секції
+      el: '.slider__controls .swiper__pagination',
       clickable: true,
       bulletClass: 'custom__bullet',
       bulletActiveClass: 'custom__bullet-active',
@@ -35,5 +35,25 @@ export function initEvents() {
       768: { slidesPerView: 2, spaceBetween: 24 },
       1440: { slidesPerView: 3, spaceBetween: 24 },
     },
+  });
+
+  const eventsSection = document.getElementById('events');
+  if (!eventsSection) return;
+
+  eventsSection.addEventListener('click', event => {
+    const registerBtn = event.target.closest('.event__btn');
+    if (!registerBtn) return;
+
+    const eventName = registerBtn.dataset.event || '';
+    const modalBackdrop = document.querySelector('[data-event-modal]');
+    const eventInput = modalBackdrop?.querySelector('[name="event"]);
+
+    if (eventInput) {
+      eventInput.value = eventName;
+    }
+
+    if (modalBackdrop) {
+      modalBackdrop.classList.add('is-open');
+    }
   });
 }
