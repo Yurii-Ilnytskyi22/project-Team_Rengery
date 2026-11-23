@@ -1,0 +1,246 @@
+.events__section {
+  padding: 64px 0;
+}
+
+.events__label {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: capitalize;
+}
+
+.events__title {
+  margin: 0 0 16px;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.events__description {
+  margin: 0 0 32px;
+  max-width: 560px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.slider__container-events {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper__events {
+  width: 100%;
+  overflow: hidden;
+}
+
+.events__section .swiper__wrapper-events {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.events__section .events__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.events__section .swiper__slide-events {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.event__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+  border-radius: 16px;
+}
+
+.event__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.event__title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.event__meta {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.event__text {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.event__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  color: #0b0500;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.event__btn:hover,
+.event__btn:focus-visible {
+  color: #e15d05;
+}
+
+.event__btn-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.event__btn:hover .event__btn-icon,
+.event__btn:focus-visible .event__btn-icon {
+  transform: translateX(3px);
+}
+
+
+.slider__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.events__nav {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.swiper__events-button-next,
+.swiper__events-button-prev {
+  position: relative;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(11, 5, 0, 0.15);
+  background-color: #e15d05;
+  color: #ffffff;
+  fill: currentColor;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.swiper__events-button-next svg,
+.swiper__events-button-prev svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+}
+
+.swiper__events-button-next:hover,
+.swiper__events-button-prev:hover,
+.swiper__events-button-next:focus,
+.swiper__events-button-prev:focus {
+  background-color: #fceee6;
+  color: #0b0500;
+}
+
+.event__btn:focus-visible,
+.swiper__events-button-next:focus-visible,
+.swiper__events-button-prev:focus-visible {
+  outline: 2px solid #e15d05;
+  outline-offset: 3px;
+}
+
+.swiper__events-button-next:active,
+.swiper__events-button-prev:active {
+  background-color: #5a2502;
+  color: #ffffff;
+}
+
+.swiper__events-button-prev:disabled,
+.swiper__events-button-next:disabled,
+.swiper__events-button-prev[disabled],
+.swiper__events-button-next[disabled] {
+  background-color: #e15d05;
+  color: #0b0500;
+  opacity: 0.2;
+  cursor: default;
+  pointer-events: none;
+}
+
+.events__section .swiper__pagination {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+}
+
+.custom__bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 !important;
+  background-color: #0b0500;
+  border-radius: 50%;
+  opacity: 0.2;
+  cursor: pointer;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.custom__bullet-active {
+  background-color: #0b0500;
+  opacity: 1;
+}
+
+@media screen and (min-width: 1440px) {
+  .events__title {
+    font-size: 48px;
+  }
+
+  .slider__controls {
+    margin-top: 32px;
+  }
+}
