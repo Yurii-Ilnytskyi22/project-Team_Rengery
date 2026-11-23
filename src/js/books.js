@@ -1,3 +1,9 @@
+import {
+  initBooksyLoader,
+  showBooksyLoader,
+  hideBooksyLoader,
+  initBooksyAnimationPreview,
+} from './booksy-loader.js';
 import axios from 'axios';
 
 const booksApi = axios.create({
@@ -263,6 +269,10 @@ export async function initBooks() {
     }
   });
 
+  initBooksyLoader();
+  initBooksyAnimationPreview();
+  showBooksyLoader();
+
   try {
     const categories = await getCategories();
     renderCategories(categories);
@@ -306,5 +316,7 @@ export async function initBooks() {
     );
 
     showMoreButton.classList.add('is-hidden');
+  } finally {
+    hideBooksyLoader();
   }
 }
