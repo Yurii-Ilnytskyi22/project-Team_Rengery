@@ -2,7 +2,8 @@ import axios from 'axios';
 import Accordion from 'accordion-js';
 import 'accordion-js/accordion.min.css';
 import '/css/modal.css';
-
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 export function initModal() {
   // DOM-елементи модального вікна
   const modal = document.querySelector('.modal');
