@@ -4,6 +4,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="event-modal-title"
+    aria-describedby="event-modal-subtitle"
   >
     <button
       class="modal__close-btn"
@@ -12,12 +13,12 @@
       data-modal-close
     >
       <svg class="modal__close-icon" width="24" height="24" aria-hidden="true">
-        <use href="./img/sprite.svg#icon-close"></use>
+        <use href="./img/sprite.svg#icon-x"></use>
       </svg>
     </button>
 
     <h2 class="modal__title" id="event-modal-title">Register</h2>
-    <p class="modal__event-name" data-modal-event-title>
+    <p class="modal__event-name" id="event-modal-subtitle" data-modal-event-title>
       Cozy Book Club &mdash; &ldquo;The Midnight Library&rdquo;
     </p>
 
@@ -32,8 +33,10 @@
           name="name"
           type="text"
           placeholder="Ann"
+          autocomplete="name"
           required
         />
+        <span class="modal__error" data-error-for="name" role="alert"></span>
       </div>
 
       <div class="modal__field">
@@ -44,8 +47,10 @@
           name="email"
           type="email"
           placeholder="hello@booksy.com"
+          autocomplete="email"
           required
         />
+        <span class="modal__error" data-error-for="email" role="alert"></span>
       </div>
 
       <div class="modal__field">

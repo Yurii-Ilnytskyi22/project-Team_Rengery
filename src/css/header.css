@@ -31,6 +31,13 @@
   display: none;
 }
 
+.header__nav-list,
+.mobile-menu__nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .header__menu-btn,
 .mobile-menu__close-btn {
   display: flex;
