@@ -2,9 +2,11 @@ import axios from 'axios';
 import Accordion from 'accordion-js';
 import 'accordion-js/accordion.min.css';
 import '/css/modal.css';
+
 export function initModal() {
   // DOM-елементи модального вікна
   const modal = document.querySelector('.modal');
+  const modalWindow = document.querySelector('.modal__window');
   const closeBtn = document.querySelector('#modal-close-btn');
 
   // DOM-елементи інформації про книгу
@@ -20,25 +22,34 @@ export function initModal() {
   // DOM-елементи покупки
   const buyForm = document.querySelector('.modal__buy-form');
   const addToCartBtn = document.querySelector('.modal__add-to-cart');
+  const buyNowBtn = document.querySelector('.modal__buy-now');
 
   // Список книг
   const booksList = document.querySelector('.books__list');
 
-  if (!modal || !closeBtn || !booksList) return;
+  if (!modal || !modalWindow || !closeBtn || !booksList) return;
 
   // Змінні
-
   const booksApi = axios.create({
     baseURL: 'https://books-backend-v2.b.goit.study/books/',
   });
 
-  let currentBook;
+  let currentBook = null;
+  let isLoading = false;
 
   // Ініціалізація акордеона
   const accordion = new Accordion('.modal__accordion', {
     duration: 400,
     showMultiple: false,
   });
+
+  // Блокування кнопок під час завантаження
+  function setControlsDisabled(disabled) {
+    if (addToCartBtn) addToCartBtn.disabled = disabled;
+    if (buyNowBtn) buyNowBtn.disabled = disabled;
+    if (minusBtn) minusBtn.disabled = disabled;
+    if (plusBtn) plusBtn.disabled = disabled;
+  }
 
   // Відкриття модального вікна
   async function openModal(bookId) {
@@ -47,23 +58,26 @@ export function initModal() {
 
     quantityInput.value = 1;
     currentBook = null;
+    isLoading = true;
+    setControlsDisabled(true);
 
     // Очищення інформації про попередню книгу
-    imageWrapper.innerHTML = '';
-    bookInfo.innerHTML = '';
+    imageWrapper.replaceChildren();
+    bookInfo.replaceChildren();
     detailsText.textContent = '';
     accordion.update();
 
     try {
       const response = await booksApi.get(`/${bookId}`);
-
       const book = response.data;
 
       currentBook = book;
-
       renderBook(book);
     } catch (error) {
       console.error('Помилка завантаження книги:', error);
+    } finally {
+      isLoading = false;
+      setControlsDisabled(false);
     }
   }
 
@@ -71,27 +85,24 @@ export function initModal() {
   function renderBook(book) {
     // Зображення книги
     const image = document.createElement('img');
-
     image.src = book.book_image;
     image.alt = book.title;
+    image.decoding = 'async';
 
     imageWrapper.append(image);
 
     // Назва книги
     const title = document.createElement('h2');
-
     title.classList.add('modal__book-title');
     title.textContent = book.title;
 
     // Автор книги
     const author = document.createElement('p');
-
     author.classList.add('modal__book-author');
     author.textContent = book.author;
 
     // Ціна книги
     const price = document.createElement('p');
-
     price.classList.add('modal__book-price');
     price.textContent = `$${book.price}`;
 
@@ -126,7 +137,7 @@ export function initModal() {
 
   // Додавання книги до кошика
   function handleAddToCart() {
-    if (!currentBook) return;
+    if (isLoading || !currentBook) return;
 
     const quantity = Number(quantityInput.value);
 
@@ -143,7 +154,7 @@ export function initModal() {
   function handleBuyNow(event) {
     event.preventDefault();
 
-    if (!currentBook) return;
+    if (isLoading || !currentBook) return;
 
     alert('Дякуємо за покупку');
 
@@ -159,6 +170,7 @@ export function initModal() {
     if (!button) return;
 
     const bookId = button.value;
+    if (!bookId) return;
 
     openModal(bookId);
   });
@@ -168,7 +180,7 @@ export function initModal() {
 
   // Закриття модального вікна при натисканні на затемнений фон
   modal.addEventListener('click', event => {
-    if (event.target === modal) {
+    if (!modalWindow.contains(event.target)) {
       closeModal();
     }
   });
@@ -181,12 +193,12 @@ export function initModal() {
   });
 
   // Обробники кнопок зміни кількості книг
-  plusBtn.addEventListener('click', increaseQuantity);
-  minusBtn.addEventListener('click', decreaseQuantity);
+  plusBtn?.addEventListener('click', increaseQuantity);
+  minusBtn?.addEventListener('click', decreaseQuantity);
 
   // Обробник кнопки додавання до кошика
-  addToCartBtn.addEventListener('click', handleAddToCart);
+  addToCartBtn?.addEventListener('click', handleAddToCart);
 
   // Обробник форми покупки
-  buyForm.addEventListener('submit', handleBuyNow);
+  buyForm?.addEventListener('submit', handleBuyNow);
 }

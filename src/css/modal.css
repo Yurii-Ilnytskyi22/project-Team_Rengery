@@ -287,6 +287,20 @@ modal__quantity input::-webkit-inner-spin-button,
 }
 /* #endregion book-information-slider */
 
+.modal__quantity-btn--minus,
+.modal__quantity-btn--plus,
+.modal__add-to-cart,
+.modal__buy-now {
+  cursor: pointer;
+}
+
+.modal__add-to-cart:hover,
+.modal__add-to-cart:focus {
+  background-color: #0b0500;
+  border-color: #0b0500;
+  color: var(--color-white);
+}
+
 /* Tablet */
 @media screen and (min-width: 768px) {
   .modal__container {
@@ -313,13 +327,26 @@ modal__quantity input::-webkit-inner-spin-button,
   }
   .modal__window {
     padding: 64px 104px;
+    min-height: auto;
   }
   .modal__content {
     gap: 24px;
   }
+
+  .modal__image {
+    flex: 0 0 380px;
+    max-width: 380px;
+  }
+
   .modal__content li {
     width: 100%;
   }
+
+.modal__info {
+  flex: 1 1 auto;
+  min-width: 0;
+  }
+
   .modal__actions {
     flex-direction: row;
     gap: 24px;
