@@ -38,32 +38,5 @@ export function initEvents() {
     });
   }
 
-  const eventsSection = document.getElementById('events');
- 
-  if (!eventsSection ) return;
-
-  eventsSection.addEventListener('click', event => {
-    const registerBtn = event.target.closest('.event__btn');
-    if (!registerBtn) return;
-
-    const eventName =
-      registerBtn.dataset.event ||
-      registerBtn
-        .closest('.swiper__slide-events')
-        ?.querySelector('.event__title')
-        ?.textContent?.trim() ||
-      '';
-
-     const backdrop = document.querySelector('[data-event-modal]');
-     if (!backdrop) return;
-
-     const titleEl = backdrop.querySelector('[data-modal-event-title]');
-     if (titleEl && eventName) {
-       titleEl.textContent = eventName;
-     }
-
-     backdrop.classList.add('is-open');
-     backdrop.setAttribute('aria-hidden', 'false');
-     document.body.classList.add('is-modal-open');
-  });
+  
 }
