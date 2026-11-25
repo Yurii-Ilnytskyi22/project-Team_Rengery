@@ -185,7 +185,7 @@ HTML-паршали об'єднуються під час обробки Vite ч
 Командна робота
 Розробка відбувається в окремих гілках. Зміни надходять до main через pull request та перевірку коду. Спільні стилі, BEM-класи й узгоджені інтерфейси модулів допомагають об'єднати секції в єдиний сайт.
 Учасник	Внесок
-Юрій Ільницький (https://github.com/Yurii-Ilnytskyi22)	Тимлід, Feedbacks
+Юрій Ільницький (https://github.com/Yurii-Ilnytskyi22)	Тімлід, Feedbacks
 Олександр Лисенко (https://github.com/CTRL-MAKE)	Скрам-майстер, Books, власна анімація завантаження
 Марія Левченко (https://github.com/Yurievna27)	Header та Hero
 Eliza Smolka (https://github.com/ElizkaSss)	Events
