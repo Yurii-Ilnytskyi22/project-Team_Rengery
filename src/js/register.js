@@ -96,3 +96,4 @@ export function initRegisterModal() {
     closeModal();
   });
 }
+export const initRegister = initRegisterModal;
