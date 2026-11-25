@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <div class="modal">
+  <!-- add class is-open -->
+  <div class="container modal__container">
+    <!-- #region modal-window -->
+    <div class="modal__window">
+      <!-- btm-close "X" -->
+      <button type="button" class="modal__close-btn" id="modal-close-btn">
+        <svg class="modal__close-icon" width="32" height="32">
+          <use href="/img/sprite.svg#icon-x"></use>
+        </svg>
+      </button>
+      <!--#region main content block-->
+      <ul class="modal__content">
+        <!--#region book-img-->
+        <li class="modal__image">
+          <!-- тут рендиться img -->
+        </li>
+        <!-- #endregion book-img-->
+        <!--#region book-information-->
+        <li class="modal__info">
+          <!--#region book-main-content-->
+          <div class="modal__book-info">
+            <!-- тут рендиться інфо про книгу -->
+          </div>
+          <!-- #endregion book-main-content-->
+          <!--#region book-buy-calculator-->
+          <form class="modal__buy-form">
+            <div class="modal__quantity">
+              <button type="button" class="modal__quantity-btn--minus">
+                <svg class="modal__quantity-icon" width="24" height="24">
+                  <use href="/img/sprite.svg#icon-minus"></use>
+                </svg>
+              </button>
+              <input
+                type="number"
+                value="1"
+                min="1"
+                class="modal__quantity-input"
+                readonly
+              />
+              <button type="button" class="modal__quantity-btn--plus">
+                <svg class="modal__quantity-icon" width="24" height="24">
+                  <use href="/img/sprite.svg#icon-plus"></use>
+                </svg>
+              </button>
+            </div>
+            <div class="modal__actions">
+              <button type="button" class="modal__add-to-cart">
+                Add To Cart
+              </button>
+              <button type="submit" class="modal__buy-now">Buy Now</button>
+            </div>
+          </form>
+          <!-- #endregion book-buy-calculator-->
+          <!--#region book-information-slider-->
+          <div class="accordion-container modal__accordion">
+            <div class="ac modal__accordion-item">
+              <div class="ac-header">
+                <h2>
+                  <button type="button" class="ac-trigger">
+                    <span>Details</span>
+                    <svg class="modal__accordion-icon" width="24" height="24">
+                      <use href="/img/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                  </button>
+                </h2>
+              </div>
+              <div class="ac-panel">
+                <p class="ac-text modal__accordion-text--details"></p>
+              </div>
+            </div>
+            <div class="ac modal__accordion-item">
+              <div class="ac-header">
+                <h2>
+                  <button type="button" class="ac-trigger">
+                    <span>Shipping</span>
+                    <svg class="modal__accordion-icon" width="24" height="24">
+                      <use href="/img/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                  </button>
+                </h2>
+              </div>
+              <div class="ac-panel">
+                <p class="ac-text">
+                  We ship across the United States within 2–5 business days. All
+                  orders are processed through USPS or a reliable courier
+                  service. Enjoy free standard shipping on orders over $50.
+                </p>
+              </div>
+            </div>
+            <div class="ac modal__accordion-item">
+              <div class="ac-header">
+                <h2>
+                  <button type="button" class="ac-trigger">
+                    <span>Returns</span>
+                    <svg class="modal__accordion-icon" width="24" height="24">
+                      <use href="/img/sprite.svg#icon-chevron-down"></use>
+                    </svg>
+                  </button>
+                </h2>
+              </div>
+              <div class="ac-panel">
+                <p class="ac-text">
+                  You can return an item within 14 days of receiving your order,
+                  provided it hasn’t been used and is in its original condition.
+                  To start a return, please contact our support team — we’ll
+                  guide you through the process quickly and hassle-free.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion book-information-slider-->
+        </li>
+        <!-- #endregion book-information-->
+      </ul>
+      <!-- #endregion main content block-->
+    </div>
+    <!-- #endregion modal-window-->
+  </div>
+</div> 
+</body>
+</html>
+
+

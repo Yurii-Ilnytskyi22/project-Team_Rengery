@@ -1,0 +1,64 @@
+<section class="books" id="books">
+  <div class="container books__container">
+    <h2 class="visually-hidden">Trending books</h2>
+
+    <div class="books__sidebar">
+      <div class="books__heading">
+        <h3 class="books__subtitle">Books</h3>
+
+        <p class="books__counter">
+          Showing
+          <span class="books__shown">0</span>
+          of
+          <span class="books__total">0</span>
+        </p>
+      </div>
+
+      <div class="books__filter">
+        <button class="books__filter-toggle" type="button">
+          <span>Categories</span>
+
+          <svg class="books__filter-icon" width="24" height="24">
+            <use href="./img/sprite.svg#icon-chevron-down"></use>
+          </svg>
+        </button>
+
+        <ul class="books__categories"></ul>
+      </div>
+    </div>
+
+    <div class="books__catalog">
+      <div id="booksy-flock" hidden aria-label="Booksy loading animation">
+        <div class="flock-stage">
+          <div class="flock-catchers" aria-hidden="true"></div>
+          <div class="flock-rescue" aria-hidden="true"></div>
+          <div class="flock-caption" role="status">
+            <span>Loading your next great read</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="books__list"></ul>
+
+      <button class="books__show-more is-hidden" type="button">
+        Show More
+      </button>
+
+      <button class="books__animation-button" type="button">
+        Catch a story
+      </button>
+
+      <dialog class="books__animation-dialog">
+        <button
+          class="books__animation-close"
+          type="button"
+          aria-label="Close animation"
+        >
+          ×
+        </button>
+
+        <div class="books__animation-content"></div>
+      </dialog>
+    </div>
+  </div>
+</section>
