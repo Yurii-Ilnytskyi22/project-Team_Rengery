@@ -1,6 +1,5 @@
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export function initRegisterModal() {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const backdrop = document.querySelector('[data-event-modal]');
   if (!backdrop) return;
 
