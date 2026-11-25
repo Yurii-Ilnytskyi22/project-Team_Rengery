@@ -21,11 +21,11 @@ export function initRegisterModal() {
   function openModal(eventName) {
     clearErrors();
 
-    const resolvedEvent = eventName || eventTitleEl?.textContent?.trim() || '';
+    const resolvedEvent = eventName || titleEl?.textContent?.trim() || '';
 
     if (resolvedEvent) {
-      if (eventTitleEl) {
-        eventTitleEl.textContent = resolvedEvent;
+      if (titleEl) {
+        titleEl.textContent = resolvedEvent;
       }
       if (eventInput) {
         eventInput.value = resolvedEvent;
@@ -33,11 +33,13 @@ export function initRegisterModal() {
     }
 
     backdrop.classList.add('is-open');
+    backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-event-modal-open');
   }
 
   function closeModal() {
     backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-event-modal-open');
   }
 
