@@ -4,7 +4,6 @@ import 'swiper/css/pagination';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
-import { initRegisterModal } from './register.js';
 
 export function initEvents() {
   const sliderEl = document.querySelector('.swiper__events');
@@ -39,22 +38,5 @@ export function initEvents() {
     });
   }
 
-  const eventsSection = document.getElementById('events');
-  const registerModal = initRegisterModal();
-  if (!eventsSection || !registerModal) return;
-
-  eventsSection.addEventListener('click', event => {
-    const registerBtn = event.target.closest('.event__btn');
-    if (!registerBtn) return;
-
-    const eventName =
-      registerBtn.dataset.event ||
-      registerBtn
-        .closest('.swiper__slide-events')
-        ?.querySelector('.event__title')
-        ?.textContent?.trim() ||
-      '';
-
-    registerModal.open(eventName);
-  });
+  
 }

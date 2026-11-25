@@ -21,17 +21,25 @@ export function initRegisterModal() {
   function openModal(eventName) {
     clearErrors();
 
-    if (eventName) {
-      if (titleEl) titleEl.textContent = eventName;
-      if (eventInput) eventInput.value = eventName;
+    const resolvedEvent = eventName || titleEl?.textContent?.trim() || '';
+
+    if (resolvedEvent) {
+      if (titleEl) {
+        titleEl.textContent = resolvedEvent;
+      }
+      if (eventInput) {
+        eventInput.value = resolvedEvent;
+      }
     }
 
     backdrop.classList.add('is-open');
+    backdrop.setAttribute('aria-hidden', 'false');
     document.body.classList.add('is-event-modal-open');
   }
 
   function closeModal() {
     backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('is-event-modal-open');
   }
 

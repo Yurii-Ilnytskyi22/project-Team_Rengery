@@ -5,7 +5,7 @@ import { initFeedback } from './js/feedbacks.js';
 import { initEvents } from './js/events.js';
 import { initFooter } from './js/footer.js';
 import { initModal } from './js/modal.js';
-import { initRegister } from './js/register.js';
+import { initRegisterModal } from './js/register.js';
 
 
 function safeInit(initFn, name) {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit(initEvents, 'events');
   safeInit(initFooter, 'footer');
   safeInit(initModal, 'modal');
-  safeInit(initRegister, 'register');
+  safeInit(initRegisterModal, 'register');
 });
 
 
