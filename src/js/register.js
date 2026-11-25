@@ -1,3 +1,4 @@
+
 let modalController = null;
 
 export function initRegisterModal() {
@@ -40,10 +41,7 @@ export function initRegisterModal() {
     lastFocusedElement = document.activeElement;
     clearErrors();
 
-    const resolvedEvent =
-      eventName ||
-      eventTitleEl?.textContent?.trim() ||
-      '';
+    const resolvedEvent = eventName || eventTitleEl?.textContent?.trim() || '';
 
     if (resolvedEvent) {
       if (eventTitleEl) {
@@ -83,7 +81,10 @@ export function initRegisterModal() {
   }
 
   backdrop.addEventListener('click', event => {
-    if (event.target === backdrop || event.target.closest('[data-modal-close]')) {
+    if (
+      event.target === backdrop ||
+      event.target.closest('[data-modal-close]')
+    ) {
       close();
     }
   });
@@ -127,7 +128,11 @@ export function initRegisterModal() {
       if (isValid) emailInput?.focus();
       isValid = false;
     } else if (!emailPattern.test(emailValue)) {
-      setFieldError(emailInput, emailError, 'Please enter a valid email address.');
+      setFieldError(
+        emailInput,
+        emailError,
+        'Please enter a valid email address.'
+      );
       if (isValid) emailInput?.focus();
       isValid = false;
     }
