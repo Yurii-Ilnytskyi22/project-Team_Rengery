@@ -22,9 +22,15 @@ export function initRegisterModal() {
   function openModal(eventName) {
     clearErrors();
 
-    if (eventName) {
-      if (titleEl) titleEl.textContent = eventName;
-      if (eventInput) eventInput.value = eventName;
+    const resolvedEvent = eventName || eventTitleEl?.textContent?.trim() || '';
+
+    if (resolvedEvent) {
+      if (eventTitleEl) {
+        eventTitleEl.textContent = resolvedEvent;
+      }
+      if (eventInput) {
+        eventInput.value = resolvedEvent;
+      }
     }
 
     backdrop.classList.add('is-open');

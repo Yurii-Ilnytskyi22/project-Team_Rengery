@@ -4,7 +4,6 @@ import 'swiper/css/pagination';
 
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
-import { initRegisterModal } from './register.js';
 
 export function initEvents() {
   const sliderEl = document.querySelector('.swiper__events');
@@ -40,8 +39,8 @@ export function initEvents() {
   }
 
   const eventsSection = document.getElementById('events');
-  const registerModal = initRegisterModal();
-  if (!eventsSection || !registerModal) return;
+ 
+  if (!eventsSection ) return;
 
   eventsSection.addEventListener('click', event => {
     const registerBtn = event.target.closest('.event__btn');
@@ -55,6 +54,16 @@ export function initEvents() {
         ?.textContent?.trim() ||
       '';
 
-    registerModal.open(eventName);
+     const backdrop = document.querySelector('[data-event-modal]');
+     if (!backdrop) return;
+
+     const titleEl = backdrop.querySelector('[data-modal-event-title]');
+     if (titleEl && eventName) {
+       titleEl.textContent = eventName;
+     }
+
+     backdrop.classList.add('is-open');
+     backdrop.setAttribute('aria-hidden', 'false');
+     document.body.classList.add('is-modal-open');
   });
 }
