@@ -33,7 +33,7 @@
 .footer__logo-icon {
   display: block;
   width: 84px;
-  height: auto;
+  height: 36px;
   flex-shrink: 0;
   --color2: #0b0500;
 }
