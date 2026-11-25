@@ -1,11 +1,11 @@
-body.is-modal-open {
+body.is-event-modal-open {
   overflow: hidden;
 }
 
-.backdrop {
+.event-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 99998;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,23 +15,24 @@ body.is-modal-open {
   visibility: hidden;
   pointer-events: none;
   overflow-y: auto;
+  overscroll-behavior: contain;
   transition:
     opacity 0.25s ease,
     visibility 0.25s ease;
 }
 
-.backdrop.is-open {
+.event-backdrop.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
-.modal {
+.event-modal {
   position: relative;
   width: 100%;
   max-width: 343px;
   margin: auto;
-  padding: 56px 20px 56px;
+  padding: 56px 20px;
   border-radius: 16px;
   background-color: #f8ede6;
   color: #0b0500;
@@ -40,11 +41,11 @@ body.is-modal-open {
   transition: transform 0.25s ease;
 }
 
-.backdrop.is-open .modal {
+.event-backdrop.is-open .event-modal {
   transform: translateY(0) scale(1);
 }
 
-.modal__close-btn {
+.event-modal__close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -65,24 +66,25 @@ body.is-modal-open {
     transform 0.2s ease;
 }
 
-.modal__close-btn:hover,
-.modal__close-btn:focus-visible {
-  color: #e15d05;
+.event-modal__close-btn:hover,
+.event-modal__close-btn:focus-visible {
+  color: var(--color-bamboo, #e15d05);
   background-color: rgba(11, 5, 0, 0.06);
 }
 
-.modal__close-btn:active {
+.event-modal__close-btn:active {
   transform: scale(0.94);
 }
 
-.modal__close-icon {
+.event-modal__close-icon {
   width: 16px;
   height: 16px;
   fill: currentColor;
 }
 
-.modal__title {
+.event-modal__title {
   margin: 0 0 8px;
+  font-family: var(--font-family, inherit);
   font-size: 36px;
   font-weight: 600;
   line-height: 1.2;
@@ -90,152 +92,176 @@ body.is-modal-open {
   text-align: center;
 }
 
-.modal__event-name {
+.event-modal__event-name {
   margin: 0 0 24px;
+  font-family: var(--font-family, inherit);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
 }
 
-.modal__form {
+.event-modal__form {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.modal__field {
+.event-modal__field {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.modal__label {
+.event-modal__label {
+  font-family: var(--font-family, inherit);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: #0b0500;
 }
 
-.modal__input,
-.modal__textarea {
+.event-modal__input,
+.event-modal__textarea {
   width: 100%;
   padding: 8px 12px;
   border: 1px solid rgba(11, 5, 0, 0.15);
   border-radius: 4px;
   background-color: rgba(11, 5, 0, 0.05);
   color: #0b0500;
-  font-family: inherit;
+  font-family: var(--font-family, inherit);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   box-sizing: border-box;
   transition:
     border-color 0.2s ease,
-    background-color 0.2s ease;
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.modal__input::placeholder,
-.modal__textarea::placeholder {
+.event-modal__input::placeholder,
+.event-modal__textarea::placeholder {
   color: rgba(11, 5, 0, 0.6);
 }
 
-.modal__input:hover,
-.modal__textarea:hover {
+.event-modal__input:hover,
+.event-modal__textarea:hover {
   border-color: rgba(11, 5, 0, 0.35);
 }
 
-.modal__input:focus,
-.modal__textarea:focus,
-.modal__input:focus-visible,
-.modal__textarea:focus-visible {
+.event-modal__input:focus,
+.event-modal__textarea:focus,
+.event-modal__input:focus-visible,
+.event-modal__textarea:focus-visible {
   outline: none;
-  border-color: #e15d05;
-  background-color: #ffffff;
+  border-color: #0b0500;
+  background-color: rgba(11, 5, 0, 0.05);
 }
 
-.modal__input.is-invalid,
-.modal__textarea.is-invalid {
-  border-color: #c62828;
+.event-modal__input.is-invalid,
+.event-modal__textarea.is-invalid {
+  border-color: var(--color-error-red, #ad0000);
+  color: var(--color-error-red, #ad0000);
 }
 
-.modal__error {
-  min-height: 18px;
-  font-size: 12px;
-  line-height: 1.3;
-  color: #c62828;
+.event-modal__input.is-invalid::placeholder,
+.event-modal__textarea.is-invalid::placeholder {
+  color: var(--color-error-red, #ad0000);
 }
 
-.modal__error:empty {
+.event-modal__error {
+  margin: 0;
+  font-family: var(--font-family, inherit);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-error-red, #ad0000);
+}
+
+.event-modal__error:empty {
   display: none;
 }
 
-.modal__textarea {
+.event-modal__textarea {
   height: 180px;
   resize: none;
 }
 
-.modal__submit-btn {
+.event-modal__submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 10px 24px;
-  border: 1px solid #e15d05;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid var(--color-bamboo, #e15d05);
   border-radius: 4px;
-  background-color: #e15d05;
+  background-color: var(--color-bamboo, #e15d05);
   color: #ffffff;
-  font-family: inherit;
+  font-family: var(--font-family, inherit);
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   cursor: pointer;
   transition:
     background-color 0.25s ease,
-    color 0.25s ease,
     border-color 0.25s ease,
+    color 0.25s ease,
     transform 0.2s ease;
 }
 
-.modal__submit-btn:hover,
-.modal__submit-btn:focus-visible {
-  background-color: #c44f03;
-  border-color: #c44f03;
+.event-modal__submit-btn:hover,
+.event-modal__submit-btn:focus-visible {
+  background-color: #0b0500;
+  border-color: #0b0500;
+  color: #ffffff;
 }
 
-.modal__submit-btn:active {
+.event-modal__submit-btn:active {
   background-color: #5a2502;
   border-color: #5a2502;
+  color: #ffffff;
   transform: translateY(1px);
 }
 
-.modal__close-btn:focus-visible,
-.modal__submit-btn:focus-visible {
-  outline: 2px solid #e15d05;
+.event-modal__submit-btn:disabled {
+  background-color: #c5bdb7;
+  border-color: #c5bdb7;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.event-modal__close-btn:focus-visible,
+.event-modal__submit-btn:focus-visible {
+  outline: 2px solid var(--color-bamboo, #e15d05);
   outline-offset: 3px;
 }
 
 @media screen and (min-width: 768px) {
-  .modal {
+  .event-modal {
     max-width: 704px;
     padding: 56px 32px;
   }
 
-  .modal__title {
+  .event-modal__title {
     font-size: 44px;
   }
 
-  .modal__submit-btn {
+  .event-modal__submit-btn {
     align-self: center;
-    width: auto;
-    min-width: 158px;
+    width: 342px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .modal {
+  .event-modal {
     max-width: 768px;
     padding: 56px;
   }
 
-  .modal__title {
+  .event-modal__title {
     font-size: 48px;
   }
 }
