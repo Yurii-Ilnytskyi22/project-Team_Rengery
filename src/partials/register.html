@@ -1,70 +1,84 @@
-<div class="backdrop" data-event-modal aria-hidden="true">
+<div class="event-backdrop" data-event-modal aria-hidden="true">
   <div
-    class="modal"
+    class="event-modal"
     role="dialog"
     aria-modal="true"
     aria-labelledby="event-modal-title"
     aria-describedby="event-modal-subtitle"
   >
     <button
-      class="modal__close-btn"
+      class="event-modal__close-btn"
       type="button"
       aria-label="Close modal"
       data-modal-close
     >
-      <svg class="modal__close-icon" width="24" height="24" aria-hidden="true">
+      <svg class="event-modal__close-icon" width="24" height="24" aria-hidden="true">
         <use href="./img/sprite.svg#icon-x"></use>
       </svg>
     </button>
 
-    <h2 class="modal__title" id="event-modal-title">Register</h2>
-    <p class="modal__event-name" id="event-modal-subtitle" data-modal-event-title>
+    <h2 class="event-modal__title" id="event-modal-title">Register</h2>
+    <p
+      class="event-modal__event-name"
+      id="event-modal-subtitle"
+      data-modal-event-title
+    >
       Cozy Book Club &mdash; &ldquo;The Midnight Library&rdquo;
     </p>
 
-    <form class="modal__form" name="event-registration-form" novalidate>
+    <form class="event-modal__form" name="event-registration-form" novalidate>
       <input type="hidden" name="event" value="" />
 
-      <div class="modal__field">
-        <label class="modal__label" for="modal-name">Name*</label>
+      <div class="event-modal__field">
+        <label class="event-modal__label" for="event-modal-name">Name*</label>
         <input
-          class="modal__input"
-          id="modal-name"
+          class="event-modal__input"
+          id="event-modal-name"
           name="name"
           type="text"
           placeholder="Ann"
           autocomplete="name"
           required
         />
-        <span class="modal__error" data-error-for="name" role="alert"></span>
+        <span
+          class="event-modal__error"
+          data-error-for="name"
+          role="alert"
+        ></span>
       </div>
 
-      <div class="modal__field">
-        <label class="modal__label" for="modal-email">Email*</label>
+      <div class="event-modal__field">
+        <label class="event-modal__label" for="event-modal-email">Email*</label>
         <input
-          class="modal__input"
-          id="modal-email"
+          class="event-modal__input"
+          id="event-modal-email"
           name="email"
           type="email"
           placeholder="hello@booksy.com"
           autocomplete="email"
           required
         />
-        <span class="modal__error" data-error-for="email" role="alert"></span>
+        <span
+          class="event-modal__error"
+          data-error-for="email"
+          role="alert"
+        ></span>
       </div>
 
-      <div class="modal__field">
-        <label class="modal__label" for="modal-message">Message</label>
+      <div class="event-modal__field">
+        <label class="event-modal__label" for="event-modal-message"
+          >Message</label
+        >
         <textarea
-          class="modal__textarea"
-          id="modal-message"
+          class="event-modal__textarea"
+          id="event-modal-message"
           name="message"
           placeholder="Type your message..."
           rows="4"
         ></textarea>
       </div>
 
-      <button class="modal__submit-btn" type="submit">Register</button>
+      <button class="event-modal__submit-btn" type="submit">Register</button>
     </form>
   </div>
 </div>

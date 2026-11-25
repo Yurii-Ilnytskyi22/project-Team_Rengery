@@ -1,44 +1,25 @@
-
-let modalController = null;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function initRegisterModal() {
-  if (modalController) {
-    return modalController;
-  }
-
   const backdrop = document.querySelector('[data-event-modal]');
-  if (!backdrop) {
-    modalController = { open: () => {}, close: () => {} };
-    return modalController;
-  }
+  if (!backdrop) return;
 
-  const eventTitleEl = backdrop.querySelector('[data-modal-event-title]');
+  const titleEl = backdrop.querySelector('[data-modal-event-title]');
   const eventInput = backdrop.querySelector('[name="event"]');
-  const form = backdrop.querySelector('.modal__form');
+  const form = backdrop.querySelector('.event-modal__form');
   const nameInput = backdrop.querySelector('[name="name"]');
   const emailInput = backdrop.querySelector('[name="email"]');
   const nameError = backdrop.querySelector('[data-error-for="name"]');
   const emailError = backdrop.querySelector('[data-error-for="email"]');
 
-  let lastFocusedElement = null;
-
-  function setFieldError(input, errorEl, message = '') {
-    if (input) {
-      input.classList.toggle('is-invalid', Boolean(message));
-      input.setAttribute('aria-invalid', message ? 'true' : 'false');
-    }
-    if (errorEl) {
-      errorEl.textContent = message;
-    }
-  }
-
   function clearErrors() {
-    setFieldError(nameInput, nameError, '');
-    setFieldError(emailInput, emailError, '');
+    nameInput?.classList.remove('is-invalid');
+    emailInput?.classList.remove('is-invalid');
+    if (nameError) nameError.textContent = '';
+    if (emailError) emailError.textContent = '';
   }
 
-  function open(eventName = '') {
-    lastFocusedElement = document.activeElement;
+  function openModal(eventName) {
     clearErrors();
 
     const resolvedEvent = eventName || eventTitleEl?.textContent?.trim() || '';
@@ -53,57 +34,35 @@ export function initRegisterModal() {
     }
 
     backdrop.classList.add('is-open');
-    backdrop.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('is-modal-open');
-
-    requestAnimationFrame(() => {
-      nameInput?.focus();
-    });
+    document.body.classList.add('is-event-modal-open');
   }
 
-  function close() {
-    if (!backdrop.classList.contains('is-open')) return;
-
+  function closeModal() {
     backdrop.classList.remove('is-open');
-    backdrop.setAttribute('aria-hidden', 'true');
-
-    const hasOtherOpenModal = document.querySelector(
-      '.backdrop.is-open, [data-modal].is-open, .modal-backdrop.is-open'
-    );
-    if (!hasOtherOpenModal) {
-      document.body.classList.remove('is-modal-open');
-    }
-
-    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-      lastFocusedElement.focus();
-      lastFocusedElement = null;
-    }
+    document.body.classList.remove('is-event-modal-open');
   }
+
+  document.getElementById('events')?.addEventListener('click', event => {
+    const btn = event.target.closest('.event__btn');
+    if (!btn) return;
+
+    const eventName =
+      btn.dataset.event ||
+      btn.closest('.swiper__slide-events')?.querySelector('.event__title')?.textContent?.trim() ||
+      '';
+
+    openModal(eventName);
+  });
 
   backdrop.addEventListener('click', event => {
-    if (
-      event.target === backdrop ||
-      event.target.closest('[data-modal-close]')
-    ) {
-      close();
+    if (event.target === backdrop || event.target.closest('[data-modal-close]')) {
+      closeModal();
     }
   });
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && backdrop.classList.contains('is-open')) {
-      close();
-    }
-  });
-
-  nameInput?.addEventListener('input', () => {
-    if (nameInput.classList.contains('is-invalid')) {
-      setFieldError(nameInput, nameError, '');
-    }
-  });
-
-  emailInput?.addEventListener('input', () => {
-    if (emailInput.classList.contains('is-invalid')) {
-      setFieldError(emailInput, emailError, '');
+      closeModal();
     }
   });
 
@@ -111,47 +70,30 @@ export function initRegisterModal() {
     event.preventDefault();
     clearErrors();
 
-    const nameValue = nameInput?.value.trim() || '';
-    const emailValue = emailInput?.value.trim() || '';
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    const name = nameInput?.value.trim() || '';
+    const email = emailInput?.value.trim() || '';
     let isValid = true;
 
-    if (!nameValue) {
-      setFieldError(nameInput, nameError, 'Please enter your name.');
-      if (isValid) nameInput?.focus();
+    if (!name) {
+      nameInput?.classList.add('is-invalid');
+      if (nameError) nameError.textContent = 'Please enter your name.';
       isValid = false;
     }
 
-    if (!emailValue) {
-      setFieldError(emailInput, emailError, 'Please enter your email.');
-      if (isValid) emailInput?.focus();
+    if (!email) {
+      emailInput?.classList.add('is-invalid');
+      if (emailError) emailError.textContent = 'Please enter your email.';
       isValid = false;
-    } else if (!emailPattern.test(emailValue)) {
-      setFieldError(
-        emailInput,
-        emailError,
-        'Please enter a valid email address.'
-      );
-      if (isValid) emailInput?.focus();
+    } else if (!emailRegex.test(email)) {
+      emailInput?.classList.add('is-invalid');
+      if (emailError) emailError.textContent = 'Please enter a valid email address.';
       isValid = false;
     }
 
     if (!isValid) return;
 
-    const payload = Object.fromEntries(new FormData(form).entries());
-    payload.name = nameValue;
-    payload.email = emailValue;
-
-    console.log('Event registration submitted:', payload);
-
+    console.log('Event registration:', Object.fromEntries(new FormData(form)));
     form.reset();
-    clearErrors();
-    close();
+    closeModal();
   });
-
-  modalController = { open, close };
-  return modalController;
 }
-
-export const initRegister = initRegisterModal;
