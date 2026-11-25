@@ -21,7 +21,9 @@ const showMoreButton = document.querySelector('.books__show-more');
 let allBooks = [];
 let currentBooks = [];
 let shownCount = 0;
+let isLoading = false;
 
+// Екранування тексту
 function escapeHTML(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -31,6 +33,7 @@ function escapeHTML(value) {
     .replaceAll("'", '&#39;');
 }
 
+// Перевірка адреси зображення
 function getImageUrl(value) {
   try {
     const url = new URL(value);
@@ -45,51 +48,11 @@ function getImageUrl(value) {
   return '';
 }
 
-async function getCategories() {
-  const response = await booksApi.get('/books/category-list');
-  return response.data;
-}
-
-async function getBooksByCategory(category) {
-  const response = await booksApi.get('/books/category', {
-    params: {
-      category: category,
-    },
-  });
-
-  return response.data;
-}
-
-async function getAllBooks(categories) {
-  const requests = categories.map(category =>
-    getBooksByCategory(category.list_name)
-  );
-
-  const results = await Promise.allSettled(requests);
-
-  const loadedBooks = [];
-  const loadedCategories = [];
-  const failedCategories = [];
-
-  results.forEach((result, index) => {
-    const categoryName = categories[index].list_name;
-
-    if (result.status === 'fulfilled') {
-      loadedBooks.push(...result.value);
-      loadedCategories.push(categoryName);
-    } else {
-      failedCategories.push(categoryName);
-
-      console.error(
-        `Failed to load category: ${categoryName}`,
-        result.reason
-      );
-    }
-  });
-
+// Видалення повторів за ID
+function removeDuplicateBooks(books) {
   const uniqueIds = new Set();
 
-  const books = loadedBooks.filter(book => {
+  return books.filter(book => {
     if (uniqueIds.has(book._id)) {
       return false;
     }
@@ -97,19 +60,59 @@ async function getAllBooks(categories) {
     uniqueIds.add(book._id);
     return true;
   });
-
-  return {
-    books,
-    loadedCategories,
-    failedCategories,
-  };
 }
 
+// Список категорій
+async function getCategories() {
+  const response = await booksApi.get('/books/category-list');
+  return response.data;
+}
+
+// Початкова добірка
+async function getTopBooks() {
+  const response = await booksApi.get('/books/top-books');
+  const books = response.data.flatMap(category => category.books);
+
+  return removeDuplicateBooks(books);
+}
+
+// Книги вибраної категорії
+async function getBooksByCategory(category) {
+  const response = await booksApi.get('/books/category', {
+    params: {
+      category,
+    },
+  });
+
+  return removeDuplicateBooks(response.data);
+}
+
+// Стан завантаження
+function setLoading(loading) {
+  isLoading = loading;
+  categoriesToggle.disabled = loading;
+  showMoreButton.disabled = loading;
+
+  categoriesList
+    .querySelectorAll('.books__category-button')
+    .forEach(button => {
+      button.disabled = loading;
+    });
+
+  if (loading) {
+    showBooksyLoader();
+  } else {
+    hideBooksyLoader();
+  }
+}
+
+// Розмітка категорій
 function renderCategories(categories) {
-  const names = [
-    'All categories',
-    ...categories.map(category => category.list_name),
-  ];
+  const categoryNames = categories
+    .map(category => category.list_name)
+    .filter(name => typeof name === 'string' && name.trim() !== '');
+
+  const names = ['All categories', ...categoryNames];
 
   const markup = names
     .map(
@@ -118,7 +121,7 @@ function renderCategories(categories) {
           <button
             class="books__category-button${index === 0 ? ' is-active' : ''}"
             type="button"
-            disabled
+            ${isLoading ? 'disabled' : ''}
           >
             ${escapeHTML(name)}
           </button>
@@ -131,6 +134,7 @@ function renderCategories(categories) {
   categoriesList.insertAdjacentHTML('beforeend', markup);
 }
 
+// Розмітка картки
 function createBookMarkup(book) {
   const title = escapeHTML(book.title);
   const author = escapeHTML(book.author);
@@ -179,6 +183,7 @@ function createBookMarkup(book) {
   `;
 }
 
+// Лічильник і Show More
 function updateBooksState() {
   shownCounter.textContent = shownCount;
   totalCounter.textContent = currentBooks.length;
@@ -190,6 +195,16 @@ function updateBooksState() {
   }
 }
 
+// Очищення списку
+function clearBooks() {
+  currentBooks = [];
+  shownCount = 0;
+  booksList.innerHTML = '';
+
+  updateBooksState();
+}
+
+// Наступна порція
 function appendBooks(amount) {
   const nextBooks = currentBooks.slice(
     shownCount,
@@ -204,10 +219,10 @@ function appendBooks(amount) {
   updateBooksState();
 }
 
+// Показ списку книг
 function displayBooks(books) {
+  clearBooks();
   currentBooks = books;
-  shownCount = 0;
-  booksList.innerHTML = '';
 
   const initialCount = window.innerWidth >= 1440 ? 24 : 10;
   appendBooks(initialCount);
@@ -220,32 +235,100 @@ function displayBooks(books) {
   }
 }
 
-function handleCategoryClick(event) {
+// Прибирання повідомлення
+function removeBooksWarning() {
+  categoriesFilter
+    .closest('.books')
+    .querySelector('.books__load-warning')
+    ?.remove();
+}
+
+// Повідомлення без видалення карток
+function showBooksWarning(error) {
+  removeBooksWarning();
+
+  const status = error.response?.status;
+  const serverMessage = error.response?.data?.message;
+
+  const isRateLimit =
+    status === 429 ||
+    (typeof serverMessage === 'string' &&
+      serverMessage.includes('429'));
+
+  const message = isRateLimit
+    ? 'Too many requests. Please try again later.'
+    : 'Failed to load this category. Please try again later.';
+
+  booksList.insertAdjacentHTML(
+    'beforebegin',
+    `<p class="books__load-warning" role="alert">
+      ${message}
+    </p>`
+  );
+}
+
+// Активна категорія
+function setActiveCategory(button) {
+  const activeButton = categoriesList.querySelector('.is-active');
+
+  activeButton?.classList.remove('is-active');
+  button.classList.add('is-active');
+}
+
+// Початок списку
+function scrollToBooks() {
+  booksList.scrollIntoView({
+    block: 'start',
+    behavior: 'instant',
+  });
+}
+
+// Вибір категорії
+async function handleCategoryClick(event) {
   const button = event.target.closest('.books__category-button');
 
-  if (!button || button.disabled) {
+  if (!button || button.disabled || isLoading) {
     return;
   }
 
+  const categoryName = button.textContent.trim();
   const activeButton = categoriesList.querySelector('.is-active');
 
-  if (activeButton) {
-    activeButton.classList.remove('is-active');
+  categoriesFilter.classList.remove('is-open');
+  removeBooksWarning();
+
+  if (button === activeButton) {
+    return;
   }
 
-  button.classList.add('is-active');
+  // Повернення до початкової добірки
+  if (categoryName === 'All categories') {
+    setActiveCategory(button);
+    displayBooks(allBooks);
+    scrollToBooks();
+    return;
+  }
 
-  const categoryName = button.textContent.trim();
+  // Старі картки залишаються під завантажувачем
+  setLoading(true);
 
-  const filteredBooks =
-    categoryName === 'All categories'
-      ? allBooks
-      : allBooks.filter(book => book.list_name === categoryName);
+  try {
+    const books = await getBooksByCategory(categoryName);
 
-  displayBooks(filteredBooks);
-  categoriesFilter.classList.remove('is-open');
+    setActiveCategory(button);
+    displayBooks(books);
+    scrollToBooks();
+  } catch (error) {
+    console.error('Failed to load category:', error);
+
+    // Залишаємо попередній список і категорію
+    showBooksWarning(error);
+  } finally {
+    setLoading(false);
+  }
 }
 
+// Ініціалізація секції
 export async function initBooks() {
   categoriesToggle.addEventListener('click', () => {
     categoriesFilter.classList.toggle('is-open');
@@ -254,6 +337,10 @@ export async function initBooks() {
   categoriesList.addEventListener('click', handleCategoryClick);
 
   showMoreButton.addEventListener('click', () => {
+    if (isLoading) {
+      return;
+    }
+
     appendBooks(4);
   });
 
@@ -271,52 +358,32 @@ export async function initBooks() {
 
   initBooksyLoader();
   initBooksyAnimationPreview();
-  showBooksyLoader();
+
+  clearBooks();
+  setLoading(true);
 
   try {
-    const categories = await getCategories();
+    const [categories, books] = await Promise.all([
+      getCategories(),
+      getTopBooks(),
+    ]);
+
+    allBooks = books;
+
     renderCategories(categories);
-
-    const result = await getAllBooks(categories);
-
-    if (result.loadedCategories.length === 0) {
-      throw new Error('No categories could be loaded.');
-    }
-
-    allBooks = result.books;
     displayBooks(allBooks);
-
-    categoriesList
-      .querySelectorAll('.books__category-button')
-      .forEach(button => {
-        const name = button.textContent.trim();
-
-        button.disabled =
-          name !== 'All categories' &&
-          !result.loadedCategories.includes(name);
-      });
-
-    if (result.failedCategories.length > 0) {
-      booksList.insertAdjacentHTML(
-        'beforebegin',
-        `<p class="books__load-warning">
-          Some categories failed to load. Please refresh the page.
-        </p>`
-      );
-    }
   } catch (error) {
     console.error('Failed to load books:', error);
 
-    booksList.innerHTML = '';
+    clearBooks();
+
     booksList.insertAdjacentHTML(
       'beforeend',
       `<li class="books__empty">
         Failed to load books. Please refresh the page.
       </li>`
     );
-
-    showMoreButton.classList.add('is-hidden');
   } finally {
-    hideBooksyLoader();
+    setLoading(false);
   }
 }

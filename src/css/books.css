@@ -1,5 +1,4 @@
-
-
+/* Прихований заголовок */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -12,6 +11,7 @@
     border: 0;
 }
 
+/* Секція */
 .books {
     padding-block: 32px;
     font-family: "Rubik", Arial, sans-serif;
@@ -31,7 +31,7 @@
     min-width: 0;
 }
 
-
+/* Заголовок і лічильник */
 .books__heading {
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@
     font-size: 14px;
 }
 
-
+/* Фільтр */
 .books__filter {
     position: relative;
     margin-top: 24px;
@@ -133,13 +133,10 @@
     background-color: rgb(11 5 0 / 5%);
 }
 
-.books__category-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-
+/* Каталог */
 .books__catalog {
+    position: relative;
+    min-height: 390px;
     margin-top: 32px;
 }
 
@@ -149,6 +146,7 @@
     gap: 40px 24px;
 }
 
+/* Картка */
 .books__item {
     display: flex;
     flex-direction: column;
@@ -162,8 +160,6 @@
     object-fit: cover;
     border-radius: 8px;
 }
-
-
 
 .books__info {
     display: flex;
@@ -200,7 +196,7 @@
     white-space: nowrap;
 }
 
-
+/* Кнопки */
 .books__learn-more,
 .books__show-more {
     display: flex;
@@ -258,13 +254,34 @@
     outline-offset: 3px;
 }
 
-
-.books__load-warning {
-    margin-bottom: 16px;
-    font-size: 14px;
+.books button:disabled {
+    cursor: not-allowed;
 }
 
+.books__category-button:disabled,
+.books__filter-toggle:disabled,
+.books__show-more:disabled {
+    opacity: 0.5;
+}
 
+/* Повідомлення про помилку */
+.books__load-warning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    margin: 0;
+    padding: 12px 16px;
+    border: 1px solid #e15d05;
+    border-radius: 4px;
+    background-color: #fceee6;
+    color: #0b0500;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Планшет */
 @media screen and (min-width: 768px) {
     .books__container {
         max-width: 768px;
@@ -298,7 +315,7 @@
     }
 }
 
-
+/* Десктоп */
 @media screen and (min-width: 1440px) {
     .books__container {
         flex-direction: row;
@@ -309,11 +326,10 @@
     }
 
     .books__sidebar {
-        display: block;
-        flex: 0 0 304px;
-
         position: sticky;
         top: 24px;
+        display: block;
+        flex: 0 0 304px;
         max-height: calc(100dvh - 48px);
         overflow-y: auto;
     }
@@ -350,23 +366,33 @@
     }
 }
 
-
-
 .is-hidden {
     display: none;
 }
 
-
-
-/* Кастомний завантажувач сгенерований ИИ */
+/* Завантажувач */
 #booksy-flock {
     --accent: #e15d05;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
+    font-family: "Trebuchet MS", Arial, sans-serif;
     color: #0b0500;
 }
 
 #booksy-flock[hidden] {
     display: none;
+}
+
+/* Показ поверх карток */
+.books__catalog>#booksy-flock:not([hidden]) {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background-color: #fceee6;
+}
+
+/* Показ у вікні перегляду */
+.books__animation-content>#booksy-flock:not([hidden]) {
+    position: relative;
+    inset: auto;
 }
 
 #booksy-flock * {
@@ -382,7 +408,7 @@
 }
 
 #booksy-flock .flock-stage::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 271px;
     right: 0;
@@ -545,7 +571,7 @@
 }
 
 #booksy-flock .person b::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 7px;
     left: 10px;
@@ -568,7 +594,7 @@
 }
 
 #booksy-flock .person::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 18px;
     left: 4px;
@@ -592,7 +618,7 @@
 }
 
 #booksy-flock .person em::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -605,7 +631,7 @@
 }
 
 #booksy-flock .person em::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: -2px;
@@ -628,7 +654,7 @@
 }
 
 #booksy-flock .student-boy .student-hair::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 3px;
     left: 0;
@@ -646,7 +672,7 @@
 }
 
 #booksy-flock .student-girl .student-hair::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 2px;
     left: -11px;
@@ -696,7 +722,7 @@
 }
 
 #booksy-flock .student-glasses::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 1px;
     left: -7px;
@@ -706,7 +732,7 @@
 }
 
 #booksy-flock .student-scarf .person i::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 2px;
     left: -18px;
@@ -732,7 +758,7 @@
 }
 
 #booksy-flock .net::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -2px;
     left: -7px;
@@ -757,7 +783,7 @@
 }
 
 #booksy-flock .net u::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 2px;
     left: -48px;
@@ -784,7 +810,7 @@
 }
 
 #booksy-flock .net u::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: -2px;
     border: 2px solid #795439;
@@ -894,7 +920,7 @@
 }
 
 #booksy-flock .rescue-person em::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -1px;
     left: 8px;
@@ -929,7 +955,7 @@
 }
 
 #booksy-flock .rescue-sign::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 50%;
@@ -1308,7 +1334,7 @@
     }
 }
 
-/* Мобільна версія */
+/* Мобільна версія анімації */
 @media (max-width: 420px) {
     #booksy-flock .catcher {
         transform: scale(0.7);
