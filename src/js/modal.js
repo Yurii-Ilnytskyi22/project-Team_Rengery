@@ -2,7 +2,8 @@ import axios from 'axios';
 import Accordion from 'accordion-js';
 import 'accordion-js/accordion.min.css';
 import '/css/modal.css';
-
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 export function initModal() {
   // DOM-елементи модального вікна
   const modal = document.querySelector('.modal');
@@ -36,6 +37,8 @@ export function initModal() {
 
   let currentBook = null;
   let isLoading = false;
+  let abortController = null;
+  let requestId = 0;
 
   // Ініціалізація акордеона
   const accordion = new Accordion('.modal__accordion', {
@@ -50,34 +53,68 @@ export function initModal() {
     if (minusBtn) minusBtn.disabled = disabled;
     if (plusBtn) plusBtn.disabled = disabled;
   }
+  const loader = document.querySelector('.modal__loader');
 
+  function setLoading(loading) {
+    isLoading = loading;
+
+    if (loader) {
+      loader.hidden = !loading;
+    }
+    modalWindow.setAttribute('aria-busy', String(loading));
+    setControlsDisabled(loading || !currentBook);
+  }
   // Відкриття модального вікна
   async function openModal(bookId) {
-    modal.classList.add('is-open');
-    document.body.classList.add('modal-open');
+    abortController?.abort();
+
+    abortController = new AbortController();
+
+    const currentRequestId = ++requestId;
 
     quantityInput.value = 1;
     currentBook = null;
-    isLoading = true;
-    setControlsDisabled(true);
-
     // Очищення інформації про попередню книгу
     imageWrapper.replaceChildren();
     bookInfo.replaceChildren();
     detailsText.textContent = '';
     accordion.update();
+    modal.classList.add('is-open');
+    document.body.classList.add('modal-open');
+    setLoading(true);
 
     try {
-      const response = await booksApi.get(`/${bookId}`);
-      const book = response.data;
+      const response = await booksApi.get(`/${bookId}`, {
+        signal: abortController.signal,
+      });
 
+      if (currentRequestId !== requestId) return;
+      const book = response.data;
+      if (!book) {
+        throw new Error('Інформацію про книгу не знайдено');
+      }
       currentBook = book;
       renderBook(book);
     } catch (error) {
+      if (axios.isCancel(error) || error.code === 'ERR_CANCELED') {
+        return;
+      }
+      if (currentRequestId !== requestId) return;
+
       console.error('Помилка завантаження книги:', error);
+
+      closeModal();
+      iziToast.error({
+        title: 'Помилка',
+        message:
+          'Не вдалося завантажити інформацію про книгу. Спробуйте ще раз.',
+        position: 'topRight',
+      });
     } finally {
-      isLoading = false;
-      setControlsDisabled(false);
+      if (currentRequestId === requestId) {
+        abortController = null;
+        setLoading(false);
+      }
     }
   }
 
@@ -115,10 +152,16 @@ export function initModal() {
 
   // Закриття модального вікна
   function closeModal() {
+    abortController?.abort();
+    abortController = null;
+    requestId++;
     modal.classList.remove('is-open');
     document.body.classList.remove('modal-open');
 
     currentBook = null;
+    setLoading(false);
+
+    setControlsDisabled(true);
   }
 
   // Збільшення кількості книг
@@ -170,6 +213,7 @@ export function initModal() {
     if (!button) return;
 
     const bookId = button.value;
+
     if (!bookId) return;
 
     openModal(bookId);
