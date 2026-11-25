@@ -1,12 +1,14 @@
 .footer {
-  padding-block: 80px;
   background-color: #ea8d50;
   color: #0b0500;
   font-family: 'Rubik', sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
-
+.footer__container {
+  padding-bottom: 80px;
+  padding-top: 80px;
+}
 /* Верхняя часть: на мобильных всё по центру в столбик */
 .footer__top {
   display: flex;
